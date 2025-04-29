@@ -3,13 +3,13 @@ import React from "react"
 import {
     AppBar,
     Toolbar,
-    Typography,
-    TextField,
-    InputAdornment,
-    MenuItem,
+    // Typography,
+    // TextField,
+    // InputAdornment,
+    // MenuItem,
     Box,
 } from "@mui/material"
-import SearchIcon from "@mui/icons-material/Search"
+// import SearchIcon from "@mui/icons-material/Search"
 import Logo from "./../assets/stadt_herne_logo.png"
 
 export default function TopNavbar() {
