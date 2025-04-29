@@ -15,6 +15,7 @@ const iconMap: { [key: string]: JSX.Element } = {
     User: <PersonIcon />,
 }
 
+// Labels und Paths für alle Pages
 const navItems = [
     { label: "Homepage", path: "homepage" },
     { label: "Favoriten", path: "favoriten" },
