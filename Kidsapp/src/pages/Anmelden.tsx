@@ -42,7 +42,7 @@ export default function Anmelden() {
                     gutterBottom
                     className="text-center"
                 >
-                    Du hast schon deine Seele abgegeben? Dann meld dich hier an
+                    Melde dich hier mit deinem Account an
                 </Typography>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -72,7 +72,7 @@ export default function Anmelden() {
                         Anmelden
                     </Button>
                 </form>
-                <h6 className={"text-center p-4"}>Du hast uns noch nicht deine Seele gegeben? Dann registriere dich <a
+                <h6 className={"text-center p-4"}>Du hast noch keinen Account? Dann registriere dich <a
                     className={"text-green-800 font-semibold hover:cursor-pointer"}
                     onClick={() => navigate("/registrieren")}>hier</a>
                 </h6>

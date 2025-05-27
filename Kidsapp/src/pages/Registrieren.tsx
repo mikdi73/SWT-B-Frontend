@@ -1,6 +1,28 @@
-import {TextField, Button, Box, Typography, createTheme, ThemeProvider} from '@mui/material';
+import {
+    TextField,
+    Button,
+    Box,
+    Typography,
+    createTheme,
+    ThemeProvider,
+    FormControl,
+    InputLabel,
+    Select, OutlinedInput, Chip, MenuItem
+} from '@mui/material';
 import {useState} from "react";
 import {useNavigate} from "react-router";
+
+
+const INTERESTS = [
+    "Sport",
+    "Kunst",
+    "Festivals",
+    "Musik",
+    "Technik",
+    "Essen",
+    "Spiele",
+    "Natur"
+];
 
 export default function Registrieren() {
     const [username, setUsername] = useState('');
@@ -8,17 +30,17 @@ export default function Registrieren() {
     const [password2, setPassword2] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [interests, setInterests] = useState<string[]>([]);
 
-// Definiere ein Theme mit benutzerdefinierter Primary-Farbe
+
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#017E3C', // Hier kannst du deine gewünschte Farbe eintragen
+                main: '#017E3C',
             },
         },
     });
 
-    // Gemeinsame SX-Styles für aktive Zustände
     const activeStyle = (theme: any) => ({
         '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
@@ -42,7 +64,7 @@ export default function Registrieren() {
             <div className="w-full h-fit pb-50">
                 <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg max-h-[80vh] overflow-y-auto">
                     <Typography variant="h4" component="h1" gutterBottom className="text-center">
-                        Du hast noch keinen Account? Gib uns deine Seele
+                        Du hast noch keinen Account? Erstelle dir hier deinen Account?
                     </Typography>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <TextField
@@ -80,17 +102,40 @@ export default function Registrieren() {
                             sx={activeStyle}
                             onChange={(e) => setPassword2(e.target.value)}
                         />
+                        <FormControl sx={{ mt: 1 }}>
+                            <InputLabel id="interests-label">Interessen</InputLabel>
+                            <Select
+                                labelId="interests-label"
+                                multiple
+                                value={interests}
+                                onChange={(e) => setInterests(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value as string[])}
+                                input={<OutlinedInput label="Interessen" />}
+                                renderValue={(selected) => (
+                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                        {(selected as string[]).map((value) => (
+                                            <Chip key={value} label={value} />
+                                        ))}
+                                    </Box>
+                                )}
+                            >
+                                {INTERESTS.map((interest) => (
+                                    <MenuItem key={interest} value={interest}>
+                                        {interest}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
 
                         <Button type="submit" variant="contained" sx={{
-                            py: 1.5,         // padding-top/-bottom
+                            py: 1.5,
                             borderRadius: '0.5rem',
-                            fontWeight: 'semi-bold', // optional
-                            fontSize: '1rem'    // optional
+                            fontWeight: 'semi-bold',
+                            fontSize: '1rem'
                         }}>
                             Registrieren
                         </Button>
                     </form>
-                    <h6 className={"text-center p-4"}>Du hast uns schon deine Seele gegeben? Dann meld dich <a
+                    <h6 className={"text-center p-4"}>Du hast schon einen Account? Dann meld dich <a
                         className={"text-green-800 font-semibold hover:cursor-pointer"}
                         onClick={() => navigate("/anmelden")}>hier</a> an</h6>
                 </Box>
