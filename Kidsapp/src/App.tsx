@@ -5,7 +5,7 @@ import Favoritenansicht from "./pages/Favoritenansicht.tsx"
 import Detailansicht from "./pages/Detailansicht.tsx"
 import Kartenansicht from "./pages/Kartenansicht.tsx"
 import Anmelden from "./pages/Anmelden.tsx"
-import Regristrieren from "./pages/Regristrieren.tsx"
+import Registrieren from "./pages/Registrieren.tsx"
 import Userprofil from "./pages/Userprofil.tsx"
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                 <Route path="/details" element={<Detailansicht />} />
                 <Route path="/karte" element={<Kartenansicht />} />
                 <Route path="/anmelden" element={<Anmelden />} />
-                <Route path="/regristrieren" element={<Regristrieren />} />
+                <Route path="/registrieren" element={<Registrieren />} />
                 <Route path="/user" element={<Userprofil />} />
             </Routes>
         </>
