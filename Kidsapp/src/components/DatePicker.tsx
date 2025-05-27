@@ -57,8 +57,11 @@ export default function CustomDatePicker() {
             ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
             : ''
         }
-        InputProps={{ readOnly: true }}
-        sx={{ width: 250 }}
+        sx={{ width: 300,
+        '& .MuiOutlinedInput-root': {
+            borderRadius: '15px',
+          },
+        }}
       />
 
       <Popper open={!!anchorEl} anchorEl={anchorEl} placement="bottom-start">

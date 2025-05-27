@@ -13,19 +13,23 @@ export default function BoxBasic() {
           p: { xs: 1, sm: 1, md: 1 },
           border: '1px solid lightgray',
           backgroundColor: 'white',
-          borderRadius: 3,
+          borderRadius: 5,
           display: 'flex',
-          gap: { xs: 1, sm: 1, md: 4 },
+          gap: 2,
           align: 'center',
           justifySelf: 'center',
-          justifyContent: 'center',
+          justifyContent: 'left',
           flexWrap: 'wrap',
-          width: '99%',
+          width: '95%',
           boxSizing: 'border-box',
       }}
     >
       <TextField
-        sx={{ width: 250 }}
+        sx={{ width: 300, marginLeft: 5,
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '30px',
+          },
+        }}
         id="input-with-icon-textfield"
         label="Suche"
         InputProps={{
@@ -41,14 +45,22 @@ export default function BoxBasic() {
       <Autocomplete
         disablePortal
         options={FilterBarData}
-        sx={{ width: 250 }}
+        sx={{ width: 300, marginLeft: 5,
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '15px',
+          },
+        }}
         renderInput={(params) => <TextField {...params} label="Standort" />}
       />
 
       <Autocomplete
         disablePortal
         options={FilterBarData}
-        sx={{ width: 250 }}
+        sx={{ width: 300,
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '15px',
+          },
+        }}
         renderInput={(params) => <TextField {...params} label="Kategorie" />}
       />
       <DatePicker />
