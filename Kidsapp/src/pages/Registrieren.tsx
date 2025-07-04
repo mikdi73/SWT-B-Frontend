@@ -7,10 +7,11 @@ import {
     ThemeProvider,
     FormControl,
     InputLabel,
-    Select, OutlinedInput, Chip, MenuItem
+    Select, OutlinedInput, Chip, MenuItem, Theme
 } from '@mui/material';
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import {useUser} from "../hooks/UserProvider.tsx";
 
 
 const INTERESTS = [
@@ -31,6 +32,7 @@ export default function Registrieren() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [interests, setInterests] = useState<string[]>([]);
+    const { setUser} = useUser();
 
 
     const theme = createTheme({
@@ -41,7 +43,7 @@ export default function Registrieren() {
         },
     });
 
-    const activeStyle = (theme: any) => ({
+    const activeStyle = (theme: Theme) => ({
         '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
                 borderColor: theme.palette.primary.main,
@@ -56,7 +58,22 @@ export default function Registrieren() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Registrierungsdaten:', {username, email, password});
+        fetch("http://localhost:8090/api/register?name="+username+"&password="+password+"&email="+email).then((res) =>{
+            if(!res.ok){
+                console.error("Fehler beim registrieren");
+                return
+            }
+            return res.json();
+        } ).then((body) => {
+            setUser({
+                id: body.id,
+                email: body.email,
+                name: body.name,
+                role: body.role,
+            })
+        }).then(() => navigate("/user")).catch((err) => {
+            console.error("Fehler beim registrieren: ", err);
+        })
     };
 
     return (

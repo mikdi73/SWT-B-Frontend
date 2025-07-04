@@ -1,10 +1,11 @@
 import ReactDOM from "react-dom/client"
 import "./index.css"
 import App from "./App.tsx"
-import { StrictMode } from "react"
-import { BrowserRouter } from "react-router"
+import {StrictMode} from "react"
+import {BrowserRouter} from "react-router"
 import NavbarTop from "./components/navbarTop.tsx"
 import NavbarBottom from "./components/navbarBottom.tsx"
+import {UserProvider} from "./hooks/UserProvider.tsx";
 
 const rootElement = document.getElementById("root")
 
@@ -14,11 +15,13 @@ if (rootElement) {
         <StrictMode>
             {/*TODO implement AuthGate */}
             {/* <AuthGate> */}
-            <BrowserRouter>
-                <NavbarTop />
-                <App />
-                <NavbarBottom />
-            </BrowserRouter>
+            <UserProvider>
+                <BrowserRouter>
+                    <NavbarTop/>
+                    <App/>
+                    <NavbarBottom/>
+                </BrowserRouter>
+            </UserProvider>
             {/* </AuthGate> */}
         </StrictMode>
     )

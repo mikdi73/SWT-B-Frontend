@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {TextField, Button, Box, Typography, ThemeProvider, createTheme} from '@mui/material';
+import {TextField, Button, Box, Typography, ThemeProvider, createTheme, Theme} from '@mui/material';
 import {useNavigate} from "react-router";
+import {useUser} from "../hooks/UserProvider.tsx";
 
 // Reuse the same theme für konsistente Primary-Farbe
 const theme = createTheme({
@@ -14,17 +15,35 @@ const theme = createTheme({
 export default function Anmelden() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const{ setUser} = useUser();
 
     const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Hier kannst du deine Login-Logik aufrufen
-        console.log('Login Daten:', {username, password});
+        fetch("http://localhost:8090/api/login?name=" + username +"&password="+password).then((res) => {
+            if(!res.ok){
+                console.error("Response war nicht ok :(");
+                return
+            }
+            console.log("Response:" , res);
+           return res.json();
+        }).then((body) => {
+            setUser({
+              id: body.id,
+              email: body.email,
+              name: body.name,
+              role: body.role,
+           })
+            navigate("/user")
+        }).then(() => navigate("/user")).catch((err) => {
+            console.error("Fehler beim anmelden: ", err);
+        })
     };
 
     // Active Style für fokussierte Felder
-    const activeStyle = (theme: any) => ({
+    const activeStyle = (theme: Theme) => ({
         '& .MuiOutlinedInput-root.Mui-focused fieldset': {
             borderColor: theme.palette.primary.main,
         },
