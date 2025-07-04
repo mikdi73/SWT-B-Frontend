@@ -36,7 +36,8 @@ export default function Anmelden() {
               name: body.name,
               role: body.role,
            })
-        }).catch((err) => {
+            navigate("/user")
+        }).then(() => navigate("/user")).catch((err) => {
             console.error("Fehler beim anmelden: ", err);
         })
     };

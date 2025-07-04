@@ -71,7 +71,7 @@ export default function Registrieren() {
                 name: body.name,
                 role: body.role,
             })
-        }).catch((err) => {
+        }).then(() => navigate("/user")).catch((err) => {
             console.error("Fehler beim registrieren: ", err);
         })
     };
