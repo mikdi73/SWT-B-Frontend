@@ -1,21 +1,34 @@
 import ActivityCard from "../components/ActivityCard.tsx";
-import Fussballimg from "../assets/fussball.jpg";
 import FilterBar from "../components/FilterBar";
+import {useEffect, useState} from "react";
+import {Offer} from "../models/AngebotType.ts";
 
 export default function Homepage() {
-    return(
+
+    const [offers, setOffers] = useState<Offer[]>([])
+
+    useEffect(() => {
+        fetch("http://localhost:8090/api/offer").then((res) => {
+            if (!res) {
+                console.error("Angebote konnten nicht geladen werden.");
+                return
+            }
+            return res.json();
+        }).then((data) => {
+            setOffers(Object.values(data));
+        }).then(() => console.log("fertig")).catch((err) => console.error(err))
+    }, []);
+
+    return (
         <>
-            <h1>Homepage</h1>
             <div>
-                <FilterBar />
+                <FilterBar/>
             </div>
-            <main className="flex columns-auto lg:row-auto lg:items-center lg:justify-center w-full gap-20 flex-wrap h-fit pb-30 p-5">
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
-                <ActivityCard imageUrl={Fussballimg} title={"Test"} description={"Das ist hier ein Test"}/>
+            <main
+                className="flex columns-auto lg:row-auto lg:items-center lg:justify-center w-full gap-20 flex-wrap h-fit pb-30 p-5">
+                {offers.map(offer => (
+                    <ActivityCard key={offer.offerId} offer={offer}/>
+                ))}
             </main>
         </>
     )
