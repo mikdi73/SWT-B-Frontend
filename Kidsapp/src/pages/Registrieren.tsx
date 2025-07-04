@@ -62,7 +62,7 @@ export default function Registrieren() {
     return (
         <ThemeProvider theme={theme}>
             <div className="w-full h-fit pb-50">
-                <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg max-h-[80vh] overflow-y-auto">
+                <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg h-auto">
                     <Typography variant="h4" component="h1" gutterBottom className="text-center">
                         Du hast noch keinen Account? Erstelle dir hier deinen Account?
                     </Typography>
@@ -135,9 +135,9 @@ export default function Registrieren() {
                             Registrieren
                         </Button>
                     </form>
-                    <h6 className={"text-center p-4"}>Du hast schon einen Account? Dann meld dich <a
+                    <h4 className={"text-center p-4"}>Du hast schon einen Account? Dann meld dich <a
                         className={"text-green-800 font-semibold hover:cursor-pointer"}
-                        onClick={() => navigate("/anmelden")}>hier</a> an</h6>
+                        onClick={() => navigate("/anmelden")}>hier</a> an</h4>
                 </Box>
             </div>
         </ThemeProvider>
