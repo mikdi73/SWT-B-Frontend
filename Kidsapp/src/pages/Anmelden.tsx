@@ -15,27 +15,28 @@ const theme = createTheme({
 export default function Anmelden() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const{ setUser} = useUser();
+    const {setUser} = useUser();
 
     const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Hier kannst du deine Login-Logik aufrufen
-        fetch("http://localhost:8090/api/login?name=" + username +"&password="+password).then((res) => {
-            if(!res.ok){
+        fetch("http://localhost:8090/api/login?name=" + username + "&password=" + password).then((res) => {
+            if (!res.ok) {
                 console.error("Response war nicht ok :(");
                 return
             }
-            console.log("Response:" , res);
-           return res.json();
+            console.log("Response:", res);
+            return res.json();
         }).then((body) => {
             setUser({
-              id: body.id,
-              email: body.email,
-              name: body.name,
-              role: body.role,
-           })
+                id: body.id,
+                email: body.email,
+                name: body.name,
+                role: body.role,
+                jwt: body.jwt,
+            })
             navigate("/user")
         }).then(() => navigate("/user")).catch((err) => {
             console.error("Fehler beim anmelden: ", err);

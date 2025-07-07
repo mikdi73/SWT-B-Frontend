@@ -70,6 +70,7 @@ export default function Registrieren() {
                 email: body.email,
                 name: body.name,
                 role: body.role,
+                jwt: body.jwt,
             })
         }).then(() => navigate("/user")).catch((err) => {
             console.error("Fehler beim registrieren: ", err);

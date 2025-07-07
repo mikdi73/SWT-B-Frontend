@@ -7,8 +7,12 @@ import Kartenansicht from "./pages/Kartenansicht.tsx"
 import Anmelden from "./pages/Anmelden.tsx"
 import Registrieren from "./pages/Registrieren.tsx"
 import Userprofil from "./pages/Userprofil.tsx"
+import {useUser} from "./hooks/UserProvider.tsx";
+import NeueAktivität from "./pages/NeueAktivität.tsx";
 
 function App() {
+
+    const {user} = useUser();
     return (
         <>
             <Routes>
@@ -20,6 +24,7 @@ function App() {
                 <Route path="/anmelden" element={<Anmelden />} />
                 <Route path="/registrieren" element={<Registrieren />} />
                 <Route path="/user" element={<Userprofil />} />
+                <Route path="/neue-aktivitaet"  element={user?.role === "author" ? <NeueAktivität/> : <Userprofil/>}/>
             </Routes>
         </>
     )
