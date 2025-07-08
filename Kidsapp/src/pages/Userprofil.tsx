@@ -33,7 +33,9 @@ export default function Userprofil() {
             <h3>Name: {user?.name}</h3>
             <h4>Rolle: {user?.role}</h4>
             <p>{user?.email}</p>
-            <button className={"p-6 bg-green-600"} onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+            {user?.role == "author" &&
+                <button className={"p-6 bg-green-600"} onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+            }
         </>
     )
 }
