@@ -83,7 +83,7 @@ export default function NeueAktivität() {
             ...data,
             eventSchedule: filteredSchedule,
         };
-        console.log(user?.jwt);//TODO Fetch aufruf muss tatsächlich noch funktionieren später
+        //TODO Fetch aufruf muss tatsächlich noch funktionieren später
         fetch("http://localhost:8090/api/offer?jwt="+ user?.jwt, {
             method: 'POST',
             headers: {

@@ -21,13 +21,11 @@ export default function Anmelden() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Hier kannst du deine Login-Logik aufrufen
         fetch("http://localhost:8090/api/login?name=" + username + "&password=" + password).then((res) => {
             if (!res.ok) {
                 console.error("Response war nicht ok :(");
                 return
             }
-            console.log("Response:", res);
             return res.json();
         }).then((body) => {
             setUser({

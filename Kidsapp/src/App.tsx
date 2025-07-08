@@ -14,19 +14,19 @@ function App() {
 
     const {user} = useUser();
     return (
-        <>
+        <div className={"overflow-x-hidden"}>
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/homepage" element={<Homepage />} />
                 <Route path="/favoriten" element={<Favoritenansicht />} />
-                <Route path="/details" element={<Detailansicht />} />
+                <Route path="/details/:offerId" element={<Detailansicht />} />
                 <Route path="/karte" element={<Kartenansicht />} />
                 <Route path="/anmelden" element={<Anmelden />} />
                 <Route path="/registrieren" element={<Registrieren />} />
                 <Route path="/user" element={<Userprofil />} />
                 <Route path="/neue-aktivitaet"  element={user?.role === "author" ? <NeueAktivität/> : <Userprofil/>}/>
             </Routes>
-        </>
+        </div>
     )
 }
 
