@@ -21,7 +21,7 @@ const ActivityCard: FC<CardProps> = ({offer}: CardProps) => {
                     <h2 onClick={() => navigate("/details/" + offer.offerId)}
                         className="text-lg cursor-pointer font-semibold">{offer.name}</h2>
                     <p onClick={() => navigate("/details/" + offer.offerId)}
-                       className="text-sm cursor-pointer text-gray-500">{offer.additionalInformation}</p>
+                       className="text-sm cursor-pointer text-gray-500 max-h-8 min-h-8">{offer.additionalInformation}</p>
                 </div>
                 <button className="text-gray-500 hover:text-red-500 transition">
                     <Heart className="w-6 h-6 cursor-pointer" strokeWidth={1.5}/>
