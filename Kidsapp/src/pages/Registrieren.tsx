@@ -38,7 +38,7 @@ export default function Registrieren() {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#017E3C',
+                main: '#00a63e',
             },
         },
     });
@@ -154,7 +154,7 @@ export default function Registrieren() {
                         </Button>
                     </form>
                     <h4 className={"text-center p-4"}>Du hast schon einen Account? Dann meld dich <a
-                        className={"text-green-800 font-semibold hover:cursor-pointer"}
+                        className={"text-green-600 font-semibold hover:cursor-pointer"}
                         onClick={() => navigate("/anmelden")}>hier</a> an</h4>
                 </Box>
             </div>

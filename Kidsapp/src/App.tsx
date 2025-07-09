@@ -8,13 +8,14 @@ import Anmelden from "./pages/Anmelden.tsx"
 import Registrieren from "./pages/Registrieren.tsx"
 import Userprofil from "./pages/Userprofil.tsx"
 import {useUser} from "./hooks/UserProvider.tsx";
-import NeueAktivität from "./pages/NeueAktivität.tsx";
+import NeueAktivitaet from "./pages/NeueAktivitaet.tsx";
+import NeueAktivitaetSuccess from "./pages/NeueAktivitaetSuccess.tsx";
 
 function App() {
 
     const {user} = useUser();
     return (
-        <div className={"overflow-x-hidden"}>
+        <div>
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/homepage" element={<Homepage />} />
@@ -24,7 +25,8 @@ function App() {
                 <Route path="/anmelden" element={<Anmelden />} />
                 <Route path="/registrieren" element={<Registrieren />} />
                 <Route path="/user" element={<Userprofil />} />
-                <Route path="/neue-aktivitaet"  element={user?.role === "author" ? <NeueAktivität/> : <Userprofil/>}/>
+                <Route path="/neue-aktivitaet"  element={user?.role === "AUTHOR" ? <NeueAktivitaet/> : <Userprofil/>}/>
+                <Route path="/neue-aktivitaet-success"  element={user?.role === "AUTHOR" ? <NeueAktivitaetSuccess/> : <Userprofil/>}/>
             </Routes>
         </div>
     )

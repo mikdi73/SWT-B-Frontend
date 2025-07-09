@@ -48,7 +48,7 @@ const LANGUAGE_OPTIONS = [
     // Weitere Sprachen...
 ];
 
-export default function NeueAktivität() {
+export default function NeueAktivitaet() {
 
     const{ user } = useUser();
     const navigate = useNavigate();
@@ -74,6 +74,7 @@ export default function NeueAktivität() {
 
     const onSubmit = (data: OfferFormValues) => {
         // Filter eventSchedule to include only days with both start and end times
+
         const filteredSchedule = Object.fromEntries(
             Object.entries(data.eventSchedule)
                 .filter(([_, times]) => times.startTime && times.endTime)
@@ -97,8 +98,8 @@ export default function NeueAktivität() {
             }
             return res.json();
         }).then((data) => {
-            if(data.status == 200){
-                console.log("Aufruf hat geklappt: ", data);
+            if(data){
+                navigate("/neue-aktivitaet-success");
             }
         }).catch((err) => {
             console.error(err);
@@ -184,7 +185,7 @@ export default function NeueAktivität() {
             {/* Abschnitt: Wiederholung & Zeitraum */}
             <section className="bg-white p-4 rounded-lg shadow">
                 <h2 className="text-xl font-semibold mb-4">Zeitraum & Zeitplan</h2>
-                <div className="flex items-center space-x-4 mb-4">
+                <div className="flex flex-col gap-2 w-fullitems-center mb-4 md:flex-row">
                     <label className="flex items-center">
                         <input type="checkbox" {...register('recurring')} className="mr-2"/>
                         Wiederkehrend
@@ -242,7 +243,7 @@ export default function NeueAktivität() {
                         );
                     }}
                 />
-                <div className="flex space-x-4 mb-4">
+                <div className="flex flex-col gap-2 md:flex-row mb-4">
                     <label className={"flex flex-col"}>
                         Minimum Alter
                     <input type="number" {...register('minAge', {valueAsNumber: true})} placeholder="Mindestalter"
@@ -279,7 +280,7 @@ export default function NeueAktivität() {
                           className="w-full border p-2 rounded"/>
             </section>
 
-            <button type="submit"
+            <button type="submit" onClick={handleSubmit(onSubmit)}
                     className="bg-green-600 text-white py-2 px-6 rounded shadow hover:bg-green-800 transition">
                 Angebot erstellen
             </button>
