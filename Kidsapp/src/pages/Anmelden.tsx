@@ -7,7 +7,7 @@ import {useUser} from "../hooks/UserProvider.tsx";
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#017E3C',
+            main: '#00a63e',
         },
     },
 });
@@ -21,13 +21,11 @@ export default function Anmelden() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Hier kannst du deine Login-Logik aufrufen
         fetch("http://localhost:8090/api/login?name=" + username + "&password=" + password).then((res) => {
             if (!res.ok) {
                 console.error("Response war nicht ok :(");
                 return
             }
-            console.log("Response:", res);
             return res.json();
         }).then((body) => {
             setUser({
@@ -93,7 +91,7 @@ export default function Anmelden() {
                     </Button>
                 </form>
                 <h6 className={"text-center p-4"}>Du hast noch keinen Account? Dann registriere dich <a
-                    className={"text-green-800 font-semibold hover:cursor-pointer"}
+                    className={"text-green-600 font-semibold hover:cursor-pointer"}
                     onClick={() => navigate("/registrieren")}>hier</a>
                 </h6>
 

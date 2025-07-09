@@ -1,5 +1,4 @@
 // components/TopNavbar.tsx
-import React from "react"
 import {
     AppBar,
     Toolbar,

@@ -2,9 +2,11 @@ import ActivityCard from "../components/ActivityCard.tsx";
 import FilterBar from "../components/FilterBar";
 import {useEffect, useState} from "react";
 import {Offer} from "../models/AngebotType.ts";
+import {useNavigate} from "react-router";
 
 export default function Homepage() {
 
+    const navigate = useNavigate();
     const [offers, setOffers] = useState<Offer[]>([])
 
     useEffect(() => {
@@ -16,7 +18,7 @@ export default function Homepage() {
             return res.json();
         }).then((data) => {
             setOffers(Object.values(data));
-        }).then(() => console.log("fertig")).catch((err) => console.error(err))
+        }).catch((err) => console.error(err))
     }, []);
 
     return (

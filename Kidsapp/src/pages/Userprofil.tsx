@@ -1,40 +1,41 @@
 import {useNavigate} from "react-router";
-import {useEffect} from "react";
 import {useUser} from "../hooks/UserProvider.tsx";
+import LoggedInUser from "./LoggedInUser.tsx";
 
 export default function Userprofil() {
 
     const navigate = useNavigate();
-    const {user, setUser} = useUser();
-
-
-    useEffect(() => {
-        if (!user) {
-            navigate("/anmelden");
-        } else {
-            //TODO Muss später wieder weg, nur zum Testen
-            setUser({
-                ...user,
-                role:"author"
-            })
-        }
-    }, []);
+    const {user} = useUser();
 
     return (
         <>
 
-            <h1>Userprofil</h1>
-            {!user &&
-                <>
-                    <a onClick={() => navigate("/anmelden")}>Anmelden</a><a
-                    onClick={() => navigate("/registrieren")}>Regristrieren</a>
-                </>
-            }
-            <h3>Name: {user?.name}</h3>
-            <h4>Rolle: {user?.role}</h4>
-            <p>{user?.email}</p>
-            {user?.role == "author" &&
-                <button className={"p-6 bg-green-600"} onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+            {!user ?
+
+                    <section className="w-1/2 mx-auto bg-white p-12 rounded-lg shadow-2xl mt-8">
+                        <h3 className="lg:text-3xl font-semibold text-green-600 text-center mb-2 text-lg">
+                            Noch nicht angemeldet?
+                        </h3>
+                        <p className="text-gray-700 text-sm text-center mb-6 lg:text-lg">
+                            Bitte melde dich an oder registriere dich, um alle Funktionen nutzen zu können.
+                        </p>
+                        <div className="flex flex-col sm:flex-row justify-center gap-4">
+                            <button
+                                onClick={() => navigate('/anmelden')}
+                                className="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded-lg lg:px-8 lg:py-4 hover:bg-green-700 transition"
+                            >
+                                Anmelden
+                            </button>
+                            <button
+                                onClick={() => navigate('/registrieren')}
+                                className="w-full sm:w-auto px-4 py-2 border border-green-600 text-green-600 rounded-lg lg:px-8 lg:py-4 hover:bg-green-100 transition"
+                            >
+                                Registrieren
+                            </button>
+                        </div>
+                    </section>
+                 :
+                <LoggedInUser/>
             }
         </>
     )

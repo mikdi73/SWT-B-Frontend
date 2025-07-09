@@ -20,6 +20,7 @@ if (rootElement) {
                     <NavbarTop/>
                     <App/>
                     <NavbarBottom/>
+
                 </BrowserRouter>
             </UserProvider>
             {/* </AuthGate> */}
