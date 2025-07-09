@@ -2,11 +2,9 @@ import ActivityCard from "../components/ActivityCard.tsx";
 import FilterBar from "../components/FilterBar";
 import {useEffect, useState} from "react";
 import {Offer} from "../models/AngebotType.ts";
-import {useNavigate} from "react-router";
 
 export default function Homepage() {
 
-    const navigate = useNavigate();
     const [offers, setOffers] = useState<Offer[]>([])
 
     useEffect(() => {
