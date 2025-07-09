@@ -13,37 +13,15 @@ export default function Detailansicht() {
     useEffect(() => {
         if (!offerId) return
 
-        const exampleOffer: Offer = {
-            offerId: 1,
-            name: "Kinder-Fußballcamp",
-            street: "Musterstraße 12",
-            city: "Fantasiestadt",
-            postalCode: 12345,
-            offerTypes: ["EVENT"],
-            targetGroups: ["KIDS"],
-            recurring: false,
-            startDate: "2025-07-28",
-            endDate: "2025-08-08",
-            eventSchedule: {
-                MONDAY: {startTime: "09:00:00", endTime: "16:00:00"},
-                TUESDAY: {startTime: "09:00:00", endTime: "16:00:00"},
-                WEDNESDAY: {startTime: "09:00:00", endTime: "16:00:00"},
-                THURSDAY: {startTime: "09:00:00", endTime: "16:00:00"},
-                FRIDAY: {startTime: "09:00:00", endTime: "16:00:00"},
-                SATURDAY: {startTime: "10:00:00", endTime: "14:00:00"},
-                // SUNDAY bleibt weg, wenn keine Termine stattfinden
-            },
-            registrationRequired: true,
-            additionalInformation: "Inklusive Mittagessen, Trikot und qualifizierter Betreuung.",
-            cost: 150,
-            filters: ["HOLIDAY_OFFERS", "PLAY_LEARN_AND_EXPERIENCE"],
-            status: "ACCEPTED",
-            minAge: 6,
-            maxAge: 12,
-            languages: ["Deutsch"],
-            providerName: "Jugendamt Fantasiestadt"
-        };
-        setOffer(exampleOffer);
+        fetch("http://localhost:8090/api/offer/"+offerId).then((res) => {
+            if(!res){
+                console.error("Fehler beim Request von Offer mit ID: "+offerId);
+                return
+            }
+            return res.json();
+        }).then((data) => {
+            setOffer(data);
+        })
     }, [])
 
     if (!offer) return <p>Lade Angebot…</p>

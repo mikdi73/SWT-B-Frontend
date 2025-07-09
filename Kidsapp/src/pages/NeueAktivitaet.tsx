@@ -1,7 +1,7 @@
 import {useForm, Controller} from 'react-hook-form';
 import Select from 'react-select';
 import {useNavigate} from "react-router";
-import { ArrowLeft } from 'lucide-react';
+import {ArrowLeft} from 'lucide-react';
 import {useUser} from "../hooks/UserProvider.tsx";
 
 export interface OfferFormValues {
@@ -31,15 +31,33 @@ export interface OfferFormValues {
 const OFFER_TYPE_OPTIONS = [
     {value: 'COURSE_WORKSHOP', label: 'Kurs/Workshop'},
     {value: 'SEMINAR', label: 'Seminar'},
+    {value: 'EVENT', label: 'Event'},
+    {value: 'CONSULTATION', label: 'Beratung'},
+    {value: 'MEDICAL_CONSULTATION', label: 'Medizinische Beratung'},
+    {value: 'ONLINE_OFFER', label: 'Online Angebot'},
+    {value: 'OTHER', label: 'Anderes'},
     // Weitere Typen...
 ];
 const TARGET_GROUP_OPTIONS = [
     {value: 'KIDS', label: 'Kids'},
     {value: 'TEENS', label: 'Teens'},
+    {value: 'PARENTS', label: 'Eltern'},
     // Weitere Gruppen...
 ];
 const FILTER_OPTIONS = [
-    {value: 'PLAY_LEARN_AND_EXPERIENCE', label: 'Spielen & Lernen'},
+    { value: 'YOUTH_CENTERS',              label: 'Jugendzentren' },
+    { value: 'HOLIDAY_OFFERS',             label: 'Ferienangebote' },
+    { value: 'PLAY_LEARN_AND_EXPERIENCE',  label: 'Spielen & Lernen' },
+    { value: 'SPORT_AND_EXERCISE',         label: 'Sport & Bewegung' },
+    { value: 'ENGAGEMENT_AND_VOLUNTEERING',label: 'Engagement & Freiwilligenarbeit' },
+    { value: 'CREATIVITY_AND_CULTURE',     label: 'Kreativität & Kultur' },
+    { value: 'PARKS_AND_PLAYGROUNDS',      label: 'Parks & Spielplätze' },
+    { value: 'FESTIVALS_AND_MARKETS',      label: 'Festivals & Märkte' },
+    { value: 'OTHER_OFFERS_LEISURE',       label: 'Weitere Freizeitangebote' },
+    { value: 'DAYCARE',                    label: 'Tagesbetreuung' },
+    { value: 'EMERGENCY_CARE',             label: 'Notfallbetreuung' },
+    { value: 'BABYSITTER',                 label: 'Babysitter' },
+    { value: 'OTHER_OFFERS_CARE',          label: 'Weitere Betreuungsangebote' },
     // Weitere Filter...
 ];
 const LANGUAGE_OPTIONS = [
@@ -50,7 +68,7 @@ const LANGUAGE_OPTIONS = [
 
 export default function NeueAktivitaet() {
 
-    const{ user } = useUser();
+    const {user} = useUser();
     const navigate = useNavigate();
 
     const {register, control, handleSubmit, watch, formState: {errors}} = useForm<OfferFormValues>({
@@ -85,20 +103,20 @@ export default function NeueAktivitaet() {
             eventSchedule: filteredSchedule,
         };
         //TODO Fetch aufruf muss tatsächlich noch funktionieren später
-        fetch("http://localhost:8090/api/offer?jwt="+ user?.jwt, {
+        fetch("http://localhost:8090/api/offer?jwt=" + user?.jwt, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(payload),
-        }).then((res) =>{
-            if(!res){
+        }).then((res) => {
+            if (!res) {
                 console.error("Fehler beim Abschicken vom Antrag für neue Aktivität.");
                 return
             }
             return res.json();
         }).then((data) => {
-            if(data){
+            if (data) {
                 navigate("/neue-aktivitaet-success");
             }
         }).catch((err) => {
@@ -120,7 +138,7 @@ export default function NeueAktivitaet() {
                 className="cursor-pointer font-medium"
                 onClick={() => navigate("/user")}
             >
-                <ArrowLeft size={26} />
+                <ArrowLeft size={26}/>
             </button>
             {/* Abschnitt: Basisdaten */}
             <section className="bg-white p-4 rounded-lg shadow">
@@ -128,11 +146,11 @@ export default function NeueAktivitaet() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input {...register('name', {required: true})} placeholder="Name des Angebots"
                            className="border p-2 rounded"/>
-                   <label className={"flex flex-row text-xl gap-2 items-center"}>
-                       PLZ
-                    <input {...register('postalCode', {valueAsNumber: true})} placeholder="PLZ"
-                           className="border p-2 rounded w-full"/>
-                   </label>
+                    <label className={"flex flex-row text-xl gap-2 items-center"}>
+                        PLZ
+                        <input {...register('postalCode', {valueAsNumber: true})} placeholder="PLZ"
+                               className="border p-2 rounded w-full"/>
+                    </label>
                     <input {...register('street')} placeholder="Straße"
                            className="border p-2 rounded col-span-1 md:col-span-2"/>
                     <input {...register('city')} placeholder="Stadt"
@@ -217,8 +235,8 @@ export default function NeueAktivitaet() {
                 </label>
                 <label className="flex flex-col gap-2">
                     Kosten für die Registrierung
-                <input type="number" step="0.01" {...register('cost', {valueAsNumber: true})} placeholder="Kosten"
-                       className="border p-2 rounded"/>
+                    <input type="number" step="0.01" {...register('cost', {valueAsNumber: true})} placeholder="Kosten"
+                           className="border p-2 rounded"/>
 
                 </label>
             </section>
@@ -246,13 +264,13 @@ export default function NeueAktivitaet() {
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                     <label className={"flex flex-col"}>
                         Minimum Alter
-                    <input type="number" {...register('minAge', {valueAsNumber: true})} placeholder="Mindestalter"
-                           className="border p-2 rounded"/>
+                        <input type="number" {...register('minAge', {valueAsNumber: true})} placeholder="Mindestalter"
+                               className="border p-2 rounded"/>
                     </label>
                     <label className={"flex flex-col"}>
                         Maximum Alter
-                    <input type="number" {...register('maxAge', {valueAsNumber: true})} placeholder="Maximalalter"
-                           className="border p-2 rounded"/>
+                        <input type="number" {...register('maxAge', {valueAsNumber: true})} placeholder="Maximalalter"
+                               className="border p-2 rounded"/>
                     </label>
                 </div>
                 <Controller
