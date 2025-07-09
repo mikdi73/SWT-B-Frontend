@@ -31,7 +31,6 @@ export default function Homepage() {
                 {offers.map(offer => (
                     <ActivityCard key={offer.offerId} offer={offer}/>
                 ))}
-                <button onClick={() => navigate("/details/1")}>Details</button>
             </main>
         </>
     )
