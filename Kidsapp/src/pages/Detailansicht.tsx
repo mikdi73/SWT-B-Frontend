@@ -82,7 +82,7 @@ export default function Detailansicht() {
                         <div className="flex flex-col">
                             <span className="font-medium text-green-600">Filter</span>
                             <span className="text-gray-700">
-            {offer.filters.map(f => f.replaceAll('_', ' ').toLowerCase()).join(', ')}
+            {offer.filters.map(f=> f.replaceAll('_', ' ').toLowerCase()).join(', ')}
           </span>
                         </div>
 

@@ -6,4 +6,6 @@ export interface User {
     email: string;
     role: Role;
     jwt: string;
+    providerId: number;
+    providerName: string;
 }

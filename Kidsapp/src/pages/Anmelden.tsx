@@ -34,6 +34,8 @@ export default function Anmelden() {
                 name: body.name,
                 role: body.role,
                 jwt: body.jwt,
+                providerId: body.providerId,
+                providerName: body.providerName,
             })
             navigate("/user")
         }).then(() => navigate("/user")).catch((err) => {
