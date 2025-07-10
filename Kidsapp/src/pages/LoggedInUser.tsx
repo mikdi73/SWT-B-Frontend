@@ -2,7 +2,6 @@ import {FC, useEffect, useState} from 'react'
 import {useUser} from '../hooks/UserProvider'
 import {useNavigate} from "react-router";
 import {Offer} from "../models/AngebotType.ts";
-import ActivityCard from "../components/ActivityCard.tsx";
 import OfferSummary from "../components/OfferSummary.tsx";
 
 const LoggedInUser: FC = () => {
@@ -17,13 +16,13 @@ const LoggedInUser: FC = () => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:8090/api/author/offer?jwt="+user?.jwt).then((res) => {
-            if(!res){
+        fetch("http://localhost:8090/api/author/offer?jwt=" + user?.jwt).then((res) => {
+            if (!res) {
                 console.error("Fehler beim Request von allen Offers für " + user?.providerName)
                 return
             }
             return res.json();
-        }).then( (data) => {
+        }).then((data) => {
             setOffers(Object.values(data))
         })
     }, []);
@@ -31,17 +30,22 @@ const LoggedInUser: FC = () => {
     return (
         <div className="p-6 flex flex-col gap-8 justify-center pb-32">
             <section className="w-full bg-white rounded-lg shadow-2xl p-6">
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between mb-3">
                     <h2 className="text-2xl font-semibold text-green-600 mb-4 ">
                         Benutzerprofil
                     </h2>
-                    <div className={"flex flex-row gap-4"}>
-                        {user?.role === "AUTHOR" &&
-                            <button className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
-                                    onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+                    <div className={"flex flex-col md:flex-row gap-4"}>
+                        {user?.role === "AUTHOR" ?
+                            <button
+                                className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
+                                onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+                            : < button
+                                className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
+                                onClick={() => navigate("/author-bewerben")}>Als Author bewerben</button>
                         }
-                        <button className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg transition hover:bg-green-700"}
-                                onClick={() => abmelden()}>Abmelden
+                        <button
+                            className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg transition hover:bg-green-700"}
+                            onClick={() => abmelden()}>Abmelden
                         </button>
                     </div>
                 </div>
