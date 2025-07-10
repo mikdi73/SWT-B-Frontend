@@ -16,15 +16,17 @@ const LoggedInUser: FC = () => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:8090/api/author/offer?jwt=" + user?.jwt).then((res) => {
-            if (!res) {
-                console.error("Fehler beim Request von allen Offers für " + user?.providerName)
-                return
-            }
-            return res.json();
-        }).then((data) => {
-            setOffers(Object.values(data))
-        })
+        if(user?.role === "AUTHOR") {
+            fetch("http://localhost:8090/api/author/offer?jwt=" + user?.jwt).then((res) => {
+                if (!res) {
+                    console.error("Fehler beim Request von allen Offers für " + user?.providerName)
+                    return
+                }
+                return res.json();
+            }).then((data) => {
+                setOffers(Object.values(data))
+            })
+        }
     }, []);
 
     return (

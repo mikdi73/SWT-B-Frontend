@@ -29,11 +29,16 @@ const OfferSummary: FC<OfferSummaryProps> = ({ offer }) => {
             {/* Titel und Status */}
             <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-800">{offer.name}</h3>
+                <div className="flex flex-row gap-4">
                 <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${statusClass}`}
                 >
           {offer.status.toLowerCase()}
         </span>
+                    <button className="text-white bg-green-600 px-2 rounded-full text-xs font-medium cursor-pointer hover:bg-green-700 transition">
+                        Bearbeiten
+                    </button>
+                </div>
             </div>
 
             {/* Zeitraum */}

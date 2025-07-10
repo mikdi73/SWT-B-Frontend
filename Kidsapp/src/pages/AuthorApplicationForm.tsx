@@ -31,16 +31,18 @@ const AuthorApplicationForm: FC = () => {
     })
 
     return (
-        <div className={"w-full flex flex-col justify-center"}>
-
-            <form
-                  className="w-1/3 mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
+        <div className={"w-full flex flex-col justify-center p-6"}>
+            <div className={"w-full md:w-1/2 mx-auto"}>
                 <button
                     className="cursor-pointer font-medium m-0"
                     onClick={() => navigate("/user")}
                 >
                     <ArrowLeft size={26}/>
                 </button>
+            </div>
+            <form
+                className="w-full md:w-1/2 mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
+
                 <h2 className="text-2xl font-semibold text-green-600 text-center">Author-Antrag</h2>
 
                 {/* Username (aus Context) */}

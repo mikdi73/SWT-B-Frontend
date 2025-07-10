@@ -84,7 +84,7 @@ export default function Registrieren() {
             <div className="w-full h-fit pb-50">
                 <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg h-auto">
                     <Typography variant="h4" component="h1" gutterBottom className="text-center">
-                        Du hast noch keinen Account? Erstelle dir hier deinen Account?
+                        Du hast noch keinen Account? Erstelle dir hier deinen Account
                     </Typography>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <TextField

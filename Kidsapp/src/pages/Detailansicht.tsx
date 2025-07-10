@@ -5,6 +5,7 @@ import ScheduleSection from "../components/ScheduleSection"
 import FeedbackSection from "../components/FeedbackSection"
 import { ArrowLeft } from "lucide-react"
 import {TARGET_GROUP_OPTIONS, OFFER_TYPE_OPTIONS, FILTER_OPTIONS} from "../models/AngebotType.ts";
+import {AdresseMap} from "../components/AdresseMap.tsx";
 
 
 // Helfer: Label finden
@@ -38,7 +39,7 @@ export default function Detailansicht() {
                     className="self-start cursor-pointer font-medium"
                     onClick={() => navigate("/homepage")}
                 >
-                    <ArrowLeft size={26} />
+                    <ArrowLeft size={26}/>
                 </button>
 
                 {/* Titel und Adresse */}
@@ -59,14 +60,16 @@ export default function Detailansicht() {
             <span className="text-gray-700 font-medium">
               {offer.cost === 0 ? 'Kostenlose Anmeldung' : `${offer.cost.toFixed(2)} € pro Anmeldung`}
             </span>
-                        <button className="w-full sm:w-auto px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition">
+                        <button
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition">
                             Jetzt anmelden
                         </button>
                     </div>
                 </section>
 
                 {/* Zeitplan */}
-                <ScheduleSection eventSchedule={offer.eventSchedule} startDate={offer.startDate} endDate={offer.endDate} />
+                <ScheduleSection eventSchedule={offer.eventSchedule} startDate={offer.startDate}
+                                 endDate={offer.endDate}/>
 
                 {/* Weitere Infos */}
                 <section className="p-4 bg-gray-50 rounded-lg">
@@ -98,8 +101,11 @@ export default function Detailansicht() {
                         </div>
                     </div>
                 </section>
+                <section className="p-4 bg-gray-50 rounded-lg">
+                    <AdresseMap address={"Herne"}/>
+                </section>
             </div>
-            <FeedbackSection />
+            <FeedbackSection/>
         </div>
     )
 }

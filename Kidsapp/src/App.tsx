@@ -43,7 +43,7 @@ function App() {
             <Route
                 path="/user"
                 element={
-                    isLoggedIn ? <Userprofil /> : <Navigate to="/anmelden" replace />
+                     <Userprofil />
                 }
             />
 
