@@ -18,7 +18,6 @@ const AuthorApplicationForm: FC = () => {
     const navigate = useNavigate()
     const {
         register,
-        handleSubmit,
         formState: { errors, isSubmitting }
     } = useForm<AuthorApplicationValues>({
         defaultValues: {
@@ -31,33 +30,10 @@ const AuthorApplicationForm: FC = () => {
         }
     })
 
-    const onSubmit = async (data: AuthorApplicationValues) => {
-        try {
-            const payload = {
-                ...data,
-                username: user?.name || '',
-                userEmail: user?.email || ''
-            }
-            const res = await fetch(
-                `http://localhost:8090/api/apply-author?jwt=${user?.jwt}`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }
-            )
-            if (!res.ok) throw new Error('Fehler beim Abschicken der Anfrage')
-            navigate('/author-application-success')
-        } catch (err) {
-            console.error(err)
-            alert('Beim Absenden ist ein Fehler aufgetreten. Bitte versuche es erneut.')
-        }
-    }
-
     return (
         <div className={"w-full flex flex-col justify-center"}>
 
-            <form onSubmit={handleSubmit(onSubmit)}
+            <form
                   className="w-1/3 mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
                 <button
                     className="cursor-pointer font-medium m-0"

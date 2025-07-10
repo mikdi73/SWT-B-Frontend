@@ -1,3 +1,34 @@
+export const TARGET_GROUP_OPTIONS = [
+    { value: 'KIDS', label: 'Kids' },
+    { value: 'TEENAGERS', label: 'Jugendliche' },
+    { value: 'PARENTS', label: 'Eltern' },
+]
+
+export const OFFER_TYPE_OPTIONS = [
+    { value: 'COURSE_WORKSHOP', label: 'Kurs/Workshop' },
+    { value: 'SEMINAR', label: 'Seminar' },
+    { value: 'EVENT', label: 'Event' },
+    { value: 'CONSULTATION', label: 'Beratung' },
+    { value: 'MEDICAL_CONSULTATION', label: 'Medizinische Beratung' },
+    { value: 'ONLINE_OFFER', label: 'Online Angebot' },
+    { value: 'OTHER', label: 'Anderes' },
+]
+
+export const FILTER_OPTIONS = [
+    { value: 'YOUTH_CENTERS', label: 'Jugendzentren' },
+    { value: 'HOLIDAY_OFFERS', label: 'Ferienangebote' },
+    { value: 'PLAY_LEARN_AND_EXPERIENCE', label: 'Spielen & Lernen' },
+    { value: 'SPORT_AND_EXERCISE', label: 'Sport & Bewegung' },
+    { value: 'ENGAGEMENT_AND_VOLUNTEERING', label: 'Engagement & Freiwilligenarbeit' },
+    { value: 'CREATIVITY_AND_CULTURE', label: 'Kreativität & Kultur' },
+    { value: 'PARKS_AND_PLAYGROUNDS', label: 'Parks & Spielplätze' },
+    { value: 'FESTIVALS_AND_MARKETS', label: 'Festivals & Märkte' },
+    { value: 'OTHER_OFFERS_LEISURE', label: 'Weitere Freizeitangebote' },
+    { value: 'DAYCARE', label: 'Tagesbetreuung' },
+    { value: 'EMERGENCY_CARE', label: 'Notfallbetreuung' },
+    { value: 'BABYSITTER', label: 'Babysitter' },
+    { value: 'OTHER_OFFERS_CARE', label: 'Weitere Betreuungsangebote' },
+]
 
 // Wochentage
 export type DayOfWeek =
