@@ -3,6 +3,7 @@ import {useUser} from '../hooks/UserProvider'
 import {useNavigate} from "react-router";
 import OfferSummary from "../components/OfferSummary.tsx";
 import {AngebotFormValues} from "../models/AngebotType.ts";
+import {url} from "../models/url.ts";
 
 const LoggedInUser: FC = () => {
     const {user, setUser} = useUser()
@@ -17,7 +18,7 @@ const LoggedInUser: FC = () => {
 
     useEffect(() => {
         if(user?.role === "AUTHOR") {
-            fetch("http://localhost:8090/api/author/offer?jwt=" + user?.jwt).then((res) => {
+            fetch(`${url}/api/author/offer?jwt=${user?.jwt}`).then((res) => {
                 if (!res) {
                     console.error("Fehler beim Request von allen Offers für " + user?.providerName)
                     return

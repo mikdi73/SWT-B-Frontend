@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TextField, Button, Box, Typography, ThemeProvider, createTheme, Theme} from '@mui/material';
 import {useNavigate} from "react-router";
 import {useUser} from "../hooks/UserProvider.tsx";
+import {url} from "../models/url.ts";
 
 // Reuse the same theme für konsistente Primary-Farbe
 const theme = createTheme({
@@ -21,7 +22,7 @@ export default function Anmelden() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        fetch("http://localhost:8090/api/login?name=" + username + "&password=" + password).then((res) => {
+        fetch(`${url}/api/login?name=${username}&password=${password}`).then((res) => {
             if (!res.ok) {
                 console.error("Response war nicht ok :(");
                 return

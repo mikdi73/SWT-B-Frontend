@@ -6,6 +6,7 @@ import FeedbackSection from "../components/FeedbackSection"
 import { ArrowLeft } from "lucide-react"
 import {TARGET_GROUP_OPTIONS, OFFER_TYPE_OPTIONS, FILTER_OPTIONS} from "../models/AngebotType.ts";
 import {AdresseMap} from "../components/AdresseMap.tsx";
+import {url} from "../models/url.ts";
 
 
 // Helfer: Label finden
@@ -24,7 +25,7 @@ export default function Detailansicht() {
 
     useEffect(() => {
         if (!offerId) return
-        fetch(`http://localhost:8090/api/offer/${offerId}`)
+        fetch(`${url}/api/offer/${offerId}`)
             .then(res => res.json())
             .then(data => setOffer(data))
             .catch(err => console.error("Fehler beim Laden des Angebots:", err))

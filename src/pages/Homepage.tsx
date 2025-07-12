@@ -10,7 +10,7 @@ export default function Homepage() {
     const [searchText, setSearchText] = useState<string>('');
 
     useEffect(() => {
-        fetch("http://localhost:8090/api/offer")
+        fetch(`${url}/api/offer`)
         .then((res) => {
             if (!res) {
                 console.error("Angebote konnten nicht geladen werden.");

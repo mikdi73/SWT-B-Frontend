@@ -2,6 +2,7 @@ import {useNavigate} from "react-router";
 import {useUser} from "../hooks/UserProvider.tsx";
 import AngebotFormular from "../components/AngebotFormular.tsx";
 import {AngebotFormValues} from "../models/AngebotType.ts";
+import {url} from "../models/url.ts";
 
 
 export default function NeueAktivitaet() {
@@ -40,7 +41,7 @@ export default function NeueAktivitaet() {
             eventSchedule: filteredSchedule,
         };
         //TODO Fetch aufruf muss tatsächlich noch funktionieren später
-        fetch("http://localhost:8090/api/offer?jwt=" + user?.jwt, {
+        fetch(`${url}/api/offer?jwt=${user?.jwt}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

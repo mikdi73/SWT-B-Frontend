@@ -1,0 +1,1 @@
+export const url = "http://kidsapp-application:8090"

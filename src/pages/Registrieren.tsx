@@ -12,6 +12,7 @@ import {
 import {useState} from "react";
 import {useNavigate} from "react-router";
 import {useUser} from "../hooks/UserProvider.tsx";
+import {url} from "../models/url.ts";
 
 
 const INTERESTS = [
@@ -58,7 +59,7 @@ export default function Registrieren() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        fetch("http://localhost:8090/api/register?name="+username+"&password="+password+"&email="+email).then((res) =>{
+        fetch(`${url}/api/register?name=${username}&password=${password}&email=${email}`).then((res) =>{
             if(!res.ok){
                 console.error("Fehler beim registrieren");
                 return
