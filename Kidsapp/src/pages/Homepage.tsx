@@ -1,11 +1,10 @@
 import ActivityCard from "../components/ActivityCard.tsx";
 import FilterBar from "../components/FilterBar";
 import {useEffect, useState} from "react";
-import {Offer} from "../models/AngebotType.ts";
+import { AngebotFormValues } from "../models/AngebotType";
 
 export default function Homepage() {
-
-    const [offers, setOffers] = useState<Offer[]>([])
+    const [offers, setOffers] = useState<AngebotFormValues[]>([])
     const [userCity, setUserCity] = useState<string | null>(null);
     const [userCategory, setUserCategory] = useState<string | null>(null);
     const [searchText, setSearchText] = useState<string>('');
@@ -48,8 +47,11 @@ export default function Homepage() {
                 searchText={searchText}
                 setSearchText={setSearchText}/>
             </div>
+
+            <hr className="h-px w-[90%] bg-[#d3d3d3] border-0 justify-self-center my-5 mb-2.5" />
+
             <main
-                className="flex columns-auto lg:row-auto lg:items-center lg:justify-center w-full gap-20 flex-wrap h-fit pb-30 p-5">
+                className="flex columns-auto lg:row-auto lg:items-center lg:justify-center w-full gap-10 flex-wrap h-fit pb-30 p-5">
                 {filteredOffers.map(offer => (
                     <ActivityCard key={offer.offerId} offer={offer}/>
                 ))}
