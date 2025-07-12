@@ -4,6 +4,7 @@ import {useParams, useNavigate} from 'react-router';
 import {useUser} from '../hooks/UserProvider';
 import AngebotFormular from "../components/AngebotFormular.tsx";
 import {AngebotFormValues} from "../models/AngebotType.ts";
+import {url} from "../models/url.ts";
 
 export default function UpdateAngebot() {
     const {offerId} = useParams<{ offerId: string }>();
@@ -13,7 +14,7 @@ export default function UpdateAngebot() {
 
     useEffect(() => {
         if (!offerId) return
-        fetch(`http://localhost:8090/api/offer/${offerId}`)
+        fetch(`${url}/api/offer/${offerId}`)
             .then(res => res.json())
             .then(data => setInitialValues(data))
             .catch(err => console.error("Fehler beim Laden des Angebots:", err))
@@ -21,7 +22,7 @@ export default function UpdateAngebot() {
 
     const handleUpdate = async (data: AngebotFormValues) => {
         const payload = {...data, offerId: offerId};
-        fetch(`http://localhost:8090/api/offer?jwt=${user?.jwt}`, {
+        fetch(`${url}/api/offer?jwt=${user?.jwt}`, {
             method: 'POST', // oder POST, je nach Backend
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload),

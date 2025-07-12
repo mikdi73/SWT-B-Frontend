@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { useUser } from '../hooks/UserProvider.tsx';
+import {url} from "../models/url.ts";
 
 const INTERESTS = [
     'Sport',
@@ -82,7 +83,7 @@ export default function Registrieren() {
 
         try {
             const res = await fetch(
-                `http://localhost:8090/api/register?name=${encodeURIComponent(
+                `${url}/api/register?name=${encodeURIComponent(
                     username
                 )}&password=${encodeURIComponent(password)}&email=${encodeURIComponent(
                     email

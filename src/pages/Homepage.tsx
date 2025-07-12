@@ -2,6 +2,7 @@ import ActivityCard from "../components/ActivityCard.tsx";
 import FilterBar from "../components/FilterBar";
 import {useEffect, useState} from "react";
 import { AngebotFormValues } from "../models/AngebotType";
+import {url} from "../models/url.ts";
 
 export default function Homepage() {
     const [offers, setOffers] = useState<AngebotFormValues[]>([])
@@ -10,7 +11,7 @@ export default function Homepage() {
     const [searchText, setSearchText] = useState<string>('');
 
     useEffect(() => {
-        fetch("http://localhost:8090/api/offer")
+        fetch(`${url}/api/offer`)
         .then((res) => {
             if (!res) {
                 console.error("Angebote konnten nicht geladen werden.");

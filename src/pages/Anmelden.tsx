@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, ThemeProvider, createTheme, Theme } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { useUser } from '../hooks/UserProvider.tsx';
+import {url} from "../models/url.ts";
 
 // Einheitliches Theme für konsistente Primary-Farbe
 const theme = createTheme({
@@ -27,7 +28,7 @@ export default function Anmelden() {
 
         try {
             const res = await fetch(
-                `http://localhost:8090/api/login?name=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+                `${url}/api/login?name=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
             );
             if (!res.ok) {
                 setError('Benutzername oder Passwort ist falsch oder es gibt den User noch nicht.');
