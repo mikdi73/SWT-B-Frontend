@@ -55,6 +55,8 @@ export interface AngebotFormValues {
     maxAge: number;
     languages: string[];
     status?: OfferStatus;
+    providerName?: string;
+    providerId?: number;
 }
 
 export type Weekday = keyof AngebotFormValues['eventSchedule'];
