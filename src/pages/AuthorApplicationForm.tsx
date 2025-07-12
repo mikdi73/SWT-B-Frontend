@@ -31,7 +31,7 @@ const AuthorApplicationForm: FC = () => {
     })
 
     return (
-        <div className={"w-full flex flex-col justify-center p-6"}>
+        <div className={"w-full flex flex-col justify-center p-6 pb-32"}>
             <div className={"w-full md:w-1/2 mx-auto"}>
                 <button
                     className="cursor-pointer font-medium m-0"
