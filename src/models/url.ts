@@ -1,1 +1,1 @@
-export const url = "http://kidsapp-application:8090" as const
+export const url = "http://localhost:8090" as const
