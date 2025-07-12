@@ -2,7 +2,7 @@ name: Build & Push React Frontend Docker Image
 
 on:
   push:
-    branches: [ docker ]
+    branches: [ develop ]
 
 permissions:
   contents: read
