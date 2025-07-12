@@ -11,7 +11,6 @@ import {
 import {ArrowLeft} from "lucide-react";
 import {useNavigate} from "react-router";
 
-
 export interface OfferFormProps {
     initialValues?: AngebotFormValues;
     onSubmit: (data: AngebotFormValues) => void;
@@ -29,7 +28,6 @@ const WEEKDAYS: Weekday[] = [
     'SUNDAY',
 ];
 
-
 export default function AngebotFormular({ initialValues, onSubmit, updateOffer }: OfferFormProps) {
 
     const navigate = useNavigate();
@@ -37,7 +35,7 @@ export default function AngebotFormular({ initialValues, onSubmit, updateOffer }
         defaultValues: initialValues,
     });
 
-    const { register, control, handleSubmit, watch } = methods;
+    const { register, control, handleSubmit } = methods;
 
     return (
         <FormProvider {...methods}>

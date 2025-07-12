@@ -41,7 +41,7 @@ export default function BottomNavbar() {
             <BottomNavigation
                 showLabels
                 value={value}
-                onChange={(event, newValue) => {
+                onChange={(_event, newValue) => {
                     setValue(newValue)
                     navigate("/" + visibleItems[newValue].path.toLowerCase())
                 }}
