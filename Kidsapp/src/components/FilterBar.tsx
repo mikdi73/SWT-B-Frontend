@@ -1,11 +1,15 @@
 import {Box, TextField, InputAdornment, Autocomplete} from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import DatePicker from './DatePicker';
-import { Offer, OFFER_TYPE_OPTIONS } from '../models/AngebotType';
+import { OFFER_TYPE_OPTIONS } from '../models/AngebotType';
 import { useMemo, useState } from 'react';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 type CategoryOptions = typeof OFFER_TYPE_OPTIONS[number];
+
+ interface Offer {
+  city?: string | null;
+}
 
 interface OfferProps {
   offers: Offer[];
