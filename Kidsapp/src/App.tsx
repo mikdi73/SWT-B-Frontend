@@ -11,6 +11,7 @@ import {useUser} from "./hooks/UserProvider.tsx";
 import NeueAktivitaet from "./pages/NeueAktivitaet.tsx";
 import NeueAktivitaetSuccess from "./pages/NeueAktivitaetSuccess.tsx";
 import AuthorApplicationForm from "./pages/AuthorApplicationForm.tsx";
+import UpdateAngebot from "./pages/UpdateAngebot.tsx";
 
 function App() {
 
@@ -21,29 +22,29 @@ function App() {
     return (
         <Routes>
             {/* Public routes */}
-            <Route path="/" element={<Homepage />} />
-            <Route path="/homepage" element={<Homepage />} />
-            <Route path="/favoriten" element={<Favoritenansicht />} />
-            <Route path="/details/:offerId" element={<Detailansicht />} />
-            <Route path="/karte" element={<Kartenansicht />} />
+            <Route path="/" element={<Homepage/>}/>
+            <Route path="/homepage" element={<Homepage/>}/>
+            <Route path="/favoriten" element={<Favoritenansicht/>}/>
+            <Route path="/details/:offerId" element={<Detailansicht/>}/>
+            <Route path="/karte" element={<Kartenansicht/>}/>
 
             <Route
                 path="/anmelden"
                 element={
-                    isLoggedIn ? <Navigate to="/user" replace /> : <Anmelden />
+                    isLoggedIn ? <Navigate to="/user" replace/> : <Anmelden/>
                 }
             />
             <Route
                 path="/registrieren"
                 element={
-                    isLoggedIn ? <Navigate to="/user" replace /> : <Registrieren />
+                    isLoggedIn ? <Navigate to="/user" replace/> : <Registrieren/>
                 }
             />
 
             <Route
                 path="/user"
                 element={
-                     <Userprofil />
+                    <Userprofil/>
                 }
             />
 
@@ -51,11 +52,11 @@ function App() {
                 path="/neue-aktivitaet"
                 element={
                     isAuthor ? (
-                        <NeueAktivitaet />
+                        <NeueAktivitaet/>
                     ) : isLoggedIn ? (
-                        <Navigate to="/user" replace />
+                        <Navigate to="/user" replace/>
                     ) : (
-                        <Navigate to="/anmelden" replace />
+                        <Navigate to="/anmelden" replace/>
                     )
                 }
             />
@@ -63,28 +64,32 @@ function App() {
                 path="/neue-aktivitaet-success"
                 element={
                     isAuthor ? (
-                        <NeueAktivitaetSuccess />
+                        <NeueAktivitaetSuccess/>
                     ) : isLoggedIn ? (
-                        <Navigate to="/user" replace />
+                        <Navigate to="/user" replace/>
                     ) : (
-                        <Navigate to="/anmelden" replace />
+                        <Navigate to="/anmelden" replace/>
                     )
                 }
             />
+            <Route path="/update-angebot/:offerId"
+                   element={isAuthor ? (
+                       <UpdateAngebot/>
+                   ) : (<Navigate to="/user" replace/>)}/>
             <Route
                 path="/author-bewerben"
                 element={
                     isLoggedIn && !isAuthor ? (
-                        <AuthorApplicationForm />
+                        <AuthorApplicationForm/>
                     ) : isAuthor ? (
-                        <Navigate to="/user" replace />
+                        <Navigate to="/user" replace/>
                     ) : (
-                        <Navigate to="/anmelden" replace />
+                        <Navigate to="/anmelden" replace/>
                     )
                 }
             />
 
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace/>}/>
         </Routes>
     )
 }

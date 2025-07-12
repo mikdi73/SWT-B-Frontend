@@ -1,10 +1,12 @@
 import { FC } from 'react'
-import { Offer } from '../models/AngebotType'
+import {useNavigate} from "react-router";
+import {AngebotFormValues} from "../models/AngebotType.ts";
 
 export type OfferSummaryProps = {
-    offer: Offer
+    offer: AngebotFormValues
 }
 
+//Formatierung vom Datum vom ISO Standard zu DD.MM.JJJJ
 const formatDate = (iso?: string) => {
     if (!iso) return '—'
     try {
@@ -16,7 +18,9 @@ const formatDate = (iso?: string) => {
     }
 }
 
-const OfferSummary: FC<OfferSummaryProps> = ({ offer }) => {
+const OfferSummary: FC<OfferSummaryProps> = ({ offer }: OfferSummaryProps) => {
+
+    const navigate = useNavigate();
     // Status-Klasse ermitteln
     const statusClass = offer.status === 'ACCEPTED'
         ? 'bg-green-100 text-green-800'
@@ -33,9 +37,9 @@ const OfferSummary: FC<OfferSummaryProps> = ({ offer }) => {
                 <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${statusClass}`}
                 >
-          {offer.status.toLowerCase()}
+          {offer?.status?.toLowerCase()}
         </span>
-                    <button className="text-white bg-green-600 px-2 rounded-full text-xs font-medium cursor-pointer hover:bg-green-700 transition">
+                    <button onClick={() => navigate("/update-angebot/"+ offer.offerId)} className="text-white bg-green-600 px-2 rounded-full text-xs font-medium cursor-pointer hover:bg-green-700 transition">
                         Bearbeiten
                     </button>
                 </div>

@@ -1,14 +1,14 @@
 import {FC, useEffect, useState} from 'react'
 import {useUser} from '../hooks/UserProvider'
 import {useNavigate} from "react-router";
-import {Offer} from "../models/AngebotType.ts";
 import OfferSummary from "../components/OfferSummary.tsx";
+import {AngebotFormValues} from "../models/AngebotType.ts";
 
 const LoggedInUser: FC = () => {
     const {user, setUser} = useUser()
     const navigate = useNavigate();
 
-    const [offers, setOffers] = useState<Offer[]>([]);
+    const [offers, setOffers] = useState<AngebotFormValues[]>([]);
 
     const abmelden = () => {
         setUser(null);
@@ -40,7 +40,7 @@ const LoggedInUser: FC = () => {
                         {user?.role === "AUTHOR" ?
                             <button
                                 className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
-                                onClick={() => navigate("/neue-aktivitaet")}>Neue Aktivität erstellen</button>
+                                onClick={() => navigate("/neue-aktivitaet/")}>Neue Aktivität erstellen</button>
                             : < button
                                 className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
                                 onClick={() => navigate("/author-bewerben")}>Als Author bewerben</button>

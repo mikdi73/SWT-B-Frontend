@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
-import { Offer } from "../models/AngebotType"
+import {AngebotFormValues} from "../models/AngebotType"
 import ScheduleSection from "../components/ScheduleSection"
 import FeedbackSection from "../components/FeedbackSection"
 import { ArrowLeft } from "lucide-react"
@@ -20,7 +20,7 @@ const getLabel = (
 export default function Detailansicht() {
     const { offerId } = useParams<{ offerId: string }>()
     const navigate = useNavigate()
-    const [offer, setOffer] = useState<Offer | null>(null)
+    const [offer, setOffer] = useState<AngebotFormValues | null>(null)
 
     useEffect(() => {
         if (!offerId) return
