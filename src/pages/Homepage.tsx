@@ -2,6 +2,7 @@ import ActivityCard from "../components/ActivityCard.tsx";
 import FilterBar from "../components/FilterBar";
 import {useEffect, useState} from "react";
 import { AngebotFormValues } from "../models/AngebotType";
+import {url} from "../models/url.ts";
 
 export default function Homepage() {
     const [offers, setOffers] = useState<AngebotFormValues[]>([])
