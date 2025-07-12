@@ -1,8 +1,13 @@
 import {FC} from "react"
 import {Heart} from "lucide-react"
-import {Offer} from "../models/AngebotType.ts";
 import Testbild from "../assets/fussball.jpg";
 import {useNavigate} from "react-router";
+
+interface Offer {
+    offerId: number | string;
+    name: string;
+    additionalInformation: string;
+}
 
 type CardProps = {
     offer: Offer;
