@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {TextField, Button, Box, Typography, ThemeProvider, createTheme, Theme} from '@mui/material';
-import {useNavigate} from "react-router";
-import {useUser} from "../hooks/UserProvider.tsx";
+import React, { useState } from 'react';
+import { TextField, Button, Box, Typography, ThemeProvider, createTheme, Theme } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { useUser } from '../hooks/UserProvider.tsx';
 
-// Reuse the same theme für konsistente Primary-Farbe
+// Einheitliches Theme für konsistente Primary-Farbe
 const theme = createTheme({
     palette: {
         primary: {
@@ -15,19 +15,26 @@ const theme = createTheme({
 export default function Anmelden() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const {setUser} = useUser();
-
+    const [error, setError] = useState('');
+    const [fieldError, setFieldError] = useState(false);
+    const { setUser } = useUser();
     const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        fetch("http://localhost:8090/api/login?name=" + username + "&password=" + password).then((res) => {
+        setError('');
+        setFieldError(false);
+
+        try {
+            const res = await fetch(
+                `http://localhost:8090/api/login?name=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            );
             if (!res.ok) {
-                console.error("Response war nicht ok :(");
-                return
+                setError('Benutzername oder Passwort ist falsch oder es gibt den User noch nicht.');
+                setFieldError(true);
+                return;
             }
-            return res.json();
-        }).then((body) => {
+            const body = await res.json();
             setUser({
                 id: body.id,
                 email: body.email,
@@ -36,14 +43,16 @@ export default function Anmelden() {
                 jwt: body.jwt,
                 providerId: body.providerId,
                 providerName: body.providerName,
-            })
-            navigate("/user")
-        }).then(() => navigate("/user")).catch((err) => {
-            console.error("Fehler beim anmelden: ", err);
-        })
+            });
+            navigate('/user');
+        } catch (err) {
+            console.error('Fehler beim Anmelden:', err);
+            setError('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+            setFieldError(true);
+        }
     };
 
-    // Active Style für fokussierte Felder
+    // Style für focusing fields
     const activeStyle = (theme: Theme) => ({
         '& .MuiOutlinedInput-root.Mui-focused fieldset': {
             borderColor: theme.palette.primary.main,
@@ -56,12 +65,7 @@ export default function Anmelden() {
     return (
         <ThemeProvider theme={theme}>
             <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg max-h-[80vh] overflow-y-auto">
-                <Typography
-                    variant="h4"
-                    component="h1"
-                    gutterBottom
-                    className="text-center"
-                >
+                <Typography variant="h4" component="h1" gutterBottom className="text-center">
                     Melde dich hier mit deinem Account an
                 </Typography>
 
@@ -71,7 +75,14 @@ export default function Anmelden() {
                         variant="outlined"
                         required
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => {
+                            setUsername(e.target.value);
+                            if (fieldError) {
+                                setFieldError(false);
+                                setError('');
+                            }
+                        }}
+                        error={fieldError}
                         sx={activeStyle}
                     />
                     <TextField
@@ -80,23 +91,46 @@ export default function Anmelden() {
                         variant="outlined"
                         required
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            if (fieldError) {
+                                setFieldError(false);
+                                setError('');
+                            }
+                        }}
+                        error={fieldError}
                         sx={activeStyle}
                     />
-                    <Button type="submit" variant="contained" sx={{
-                        py: 1.5,         // padding-top/-bottom
-                        borderRadius: '0.5rem',
-                        fontWeight: 'semi-bold', // optional
-                        fontSize: '1rem'    // optional
-                    }}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                            py: 1.5,
+                            borderRadius: '0.5rem',
+                            fontWeight: 'semi-bold',
+                            fontSize: '1rem',
+                        }}
+                    >
                         Anmelden
                     </Button>
-                </form>
-                <h6 className={"text-center p-4"}>Du hast noch keinen Account? Dann registriere dich <a
-                    className={"text-green-600 font-semibold hover:cursor-pointer"}
-                    onClick={() => navigate("/registrieren")}>hier</a>
-                </h6>
 
+                    {error && (
+                        <Typography variant="body2" color="error" align="center">
+                            {error}
+                        </Typography>
+                    )}
+                </form>
+
+                <Typography variant="body2" className="text-center p-4">
+                    Du hast noch keinen Account? Dann registriere dich{' '}
+                    <Typography
+                        component="span"
+                        className="text-green-600 font-semibold hover:cursor-pointer"
+                        onClick={() => navigate('/registrieren')}
+                    >
+                        hier
+                    </Typography>
+                </Typography>
             </Box>
         </ThemeProvider>
     );
