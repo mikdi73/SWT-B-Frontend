@@ -52,7 +52,7 @@ export default function FilterBar({
           justifySelf: 'center',
           justifyContent: 'left',
           flexWrap: 'wrap',
-          width: '95%',
+          width: '90%',
           boxSizing: 'border-box',
       }}
     >

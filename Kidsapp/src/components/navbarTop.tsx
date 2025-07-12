@@ -21,8 +21,6 @@ export default function TopNavbar() {
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 2,
-                        mb: 2,
                     }}
                 >
                     <a href="/" className="flex items-center">
