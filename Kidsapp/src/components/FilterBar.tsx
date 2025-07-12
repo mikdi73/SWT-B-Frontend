@@ -1,12 +1,40 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+import {Box, TextField, InputAdornment, Autocomplete} from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import Autocomplete from '@mui/material/Autocomplete';
-import FilterBarData from './FilterBarData';
 import DatePicker from './DatePicker';
+import { Offer, OFFER_TYPE_OPTIONS } from '../models/AngebotType';
+import { useMemo, useState } from 'react';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
-export default function BoxBasic() {
+type CategoryOptions = typeof OFFER_TYPE_OPTIONS[number];
+
+interface OfferProps {
+  offers: Offer[];
+  userCity: string | null;
+  setUserCity: (city: string | null) => void;
+  userCategory: string | null;
+  setUserCategory: (category: string | null) => void;
+  searchText: string;
+  setSearchText: (text: string) => void;
+}
+
+export default function FilterBar({
+  offers,
+  setUserCity,
+  userCategory,
+  setUserCategory,
+  searchText,
+  setSearchText,
+}: OfferProps) {
+  const [cityInputValue, setCityInputValue] = useState('');
+
+    const cityOptions = useMemo(() => {
+    const citiesSet = new Set<string>();
+    offers.forEach((offer) => {
+      if (offer.city) citiesSet.add(offer.city);
+    });
+    return Array.from(citiesSet).sort((a, b) => a.localeCompare(b));
+  }, [offers]);
+
   return (
     <Box
       sx={{
@@ -25,44 +53,80 @@ export default function BoxBasic() {
       }}
     >
       <TextField
-        sx={{ width: 300, marginLeft: 5,
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '30px',
-          },
-        }}
-        id="input-with-icon-textfield"
-        label="Suche"
-        InputProps={{
+      variant="outlined"
+      label="Suche"
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+      slotProps={{
+        input: {
           endAdornment: (
             <InputAdornment position="end">
               <SearchOutlinedIcon />
             </InputAdornment>
-          ),
-        }}
-        variant="outlined"
+          )
+        }
+      }}
+      sx={{ width: 300, marginLeft: 5,
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '30px',
+        },
+      }}
       />
-
+      
       <Autocomplete
-        disablePortal
-        options={FilterBarData}
-        sx={{ width: 300, marginLeft: 5,
+        freeSolo
+        options={cityOptions}
+        inputValue={cityInputValue}
+        onInputChange={(_, newInput) => {
+          setCityInputValue(newInput);
+            setUserCity(newInput.trim() || null);
+        }}
+        renderInput={(params) => (
+          <TextField
+      {...params}
+      label="Stadt"
+      InputProps={{
+        ...params.InputProps,
+        endAdornment: (
+          <>
+            {params.InputProps.endAdornment}
+            <InputAdornment position="end">
+              <LocationCityIcon />
+            </InputAdornment>
+          </>
+        ),
+      }}
+    />
+        )}
+        sx={{
+          width: 300,
           '& .MuiOutlinedInput-root': {
             borderRadius: '15px',
+        
           },
         }}
-        renderInput={(params) => <TextField {...params} label="Standort" />}
       />
 
-      <Autocomplete
+      <Autocomplete<CategoryOptions>
         disablePortal
-        options={FilterBarData}
+        options={OFFER_TYPE_OPTIONS}
+        getOptionLabel={(option) => option.label}
+        value={
+          userCategory
+            ? OFFER_TYPE_OPTIONS.find((opt) => opt.value === userCategory) || null
+            : null
+        }
+        onChange={(_, newValue) => {
+          setUserCategory(newValue ? newValue.value : null);
+        }}
+        renderInput={(params) => <TextField {...params} label="Kategorie" />}
         sx={{ width: 300,
           '& .MuiOutlinedInput-root': {
             borderRadius: '15px',
           },
         }}
-        renderInput={(params) => <TextField {...params} label="Kategorie" />}
       />
+
       <DatePicker />
     </Box>
   );
