@@ -3,6 +3,7 @@ import "./index.css"
 import App from "./App.tsx"
 import {StrictMode} from "react"
 import {BrowserRouter} from "react-router"
+import {FavoritenContext} from "./components/FavoritenContext";
 import NavbarTop from "./components/navbarTop.tsx"
 import NavbarBottom from "./components/navbarBottom.tsx"
 import {UserProvider} from "./hooks/UserProvider.tsx";
@@ -17,10 +18,11 @@ if (rootElement) {
             {/* <AuthGate> */}
             <UserProvider>
                 <BrowserRouter>
-                    <NavbarTop/>
-                    <App/>
-                    <NavbarBottom/>
-
+                    <FavoritenContext>
+                        <NavbarTop/>
+                        <App/>
+                        <NavbarBottom/>
+                    </FavoritenContext>
                 </BrowserRouter>
             </UserProvider>
             {/* </AuthGate> */}
