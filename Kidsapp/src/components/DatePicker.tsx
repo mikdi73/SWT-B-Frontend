@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-  Popper, Paper, MenuItem, Typography, Box, TextField
+  Popper, Paper, MenuItem, Typography, Box, TextField,
+  IconButton,
+  InputAdornment
 } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { ClearIcon, DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { startOfWeek, endOfWeek } from 'date-fns';
 import { de } from 'date-fns/locale';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 export default function CustomDatePicker() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -49,14 +52,36 @@ export default function CustomDatePicker() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
       <TextField
-        inputRef={inputRef}
         label="Datum"
-        onClick={handleOpen}
         value={
           startDate && endDate
             ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
             : ''
         }
+        slotProps={{
+            input: {
+              ref: inputRef,
+              onClick: handleOpen,
+              readOnly: true,
+              endAdornment: (
+                <InputAdornment position="end" sx={{ display: 'flex', gap: 1 }}>
+                  {startDate && endDate && (
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setStartDate(null);
+                        setEndDate(null);
+                      }}
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  )}
+                  <CalendarTodayIcon />
+                </InputAdornment>
+              ),
+            },
+          }}
         sx={{ width: 300,
         '& .MuiOutlinedInput-root': {
             borderRadius: '15px',
@@ -71,6 +96,7 @@ export default function CustomDatePicker() {
           <MenuItem onClick={toggleCustom}>
             <Typography variant="body1">Genauer Zeitraum</Typography>
           </MenuItem>
+          
 
           {openCustom && (
             <Box mt={2} display="flex" flexDirection="column" gap={0.5}>
