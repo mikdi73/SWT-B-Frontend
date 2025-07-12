@@ -1,1 +1,1 @@
-export const url = "kidsapp-application:8090"
+export const url = "http://kidsapp-application:8090"
