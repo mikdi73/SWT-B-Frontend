@@ -12,7 +12,7 @@ export default function Userprofil() {
 
             {!user ?
 
-                    <section className="w-1/2 mx-auto bg-white p-12 rounded-lg shadow-2xl mt-8">
+                    <section className="w-[90%] md:w-1/2 mx-auto bg-white p-12 rounded-lg shadow-2xl mt-8">
                         <h3 className="lg:text-3xl font-semibold text-green-600 text-center mb-2 text-lg">
                             Noch nicht angemeldet?
                         </h3>
