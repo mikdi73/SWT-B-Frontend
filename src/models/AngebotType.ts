@@ -11,6 +11,7 @@ export const OFFER_TYPE_OPTIONS = [
     { value: 'CONSULTATION', label: 'Beratung' },
     { value: 'MEDICAL_CONSULTATION', label: 'Medizinische Beratung' },
     { value: 'ONLINE_OFFER', label: 'Online Angebot' },
+    { value: 'GROUP_OFFER', label: 'Gruppen Angebot' },
     { value: 'OTHER', label: 'Anderes' },
 ]
 

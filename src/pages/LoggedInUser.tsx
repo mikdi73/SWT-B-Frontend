@@ -4,17 +4,23 @@ import {useNavigate} from "react-router";
 import OfferSummary from "../components/OfferSummary.tsx";
 import {AngebotFormValues} from "../models/AngebotType.ts";
 import {url} from "../models/url.ts";
+import AngemeldetesAngebotSummary from "../components/AngemeldetesAngebotSummary.tsx";
 
 const LoggedInUser: FC = () => {
     const {user, setUser} = useUser()
     const navigate = useNavigate();
 
     const [offers, setOffers] = useState<AngebotFormValues[]>([]);
+    const [angemeldeteId, setAngemeldeteId] = useState<number[]>([])
 
     const abmelden = () => {
         setUser(null);
         navigate("/");
     }
+
+    const handleAbmeldenAngebot = (id: number) => {
+        setOffers(prev => prev.filter(o => o.offerId !== id));
+    };
 
     useEffect(() => {
         if(user?.role === "AUTHOR") {
@@ -27,8 +33,42 @@ const LoggedInUser: FC = () => {
             }).then((data) => {
                 setOffers(Object.values(data))
             })
+        } else{
+            fetch(`${url}/api/offer/register?jwt=${user?.jwt}`).then((res) => {
+                if(!res) return;
+                return res.json();
+            }).then(({ ACCEPTED }: { ACCEPTED: number[] }) => {
+                //nur das Accepted Array aus der Reponse lesen und auf den state setzen
+                setAngemeldeteId(ACCEPTED);
+            }).catch((err) => {
+                console.error(err);
+            })
         }
     }, []);
+
+    useEffect(() => {
+// Wenn sich acceptedIds ändert, lade alle neuen Offers
+        if(angemeldeteId){
+            angemeldeteId.forEach(id => {
+                fetch(`${url}/api/offer/${id}`)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        return res.json();
+                    })
+                    .then(fetchedOffer => {
+                        // hänge jeden Offer an das bestehende Array an
+                        setOffers(prev => {
+                            // optional: Duplikate vermeiden
+                            if (prev.some(o => o.offerId === fetchedOffer.offerId)) {
+                                return prev;
+                            }
+                            return [...prev, fetchedOffer];
+                        });
+                    })
+                    .catch(err => console.error("Fehler beim Laden eines Offers:", err));
+            });
+        }
+    }, [angemeldeteId]);
 
     return (
         <div className="p-6 flex flex-col gap-8 justify-center pb-32">
@@ -77,7 +117,7 @@ const LoggedInUser: FC = () => {
                     }
                 </div>
             </section>
-            {user?.role === "AUTHOR" &&
+            {user?.role === "AUTHOR" ?
                 <section className="w-full bg-white rounded-lg shadow-2xl p-6">
                     <h2 className="text-2xl font-semibold text-green-600 mb-4 ">Ihre Angebote</h2>
                     {Array.isArray(offers) ? (
@@ -87,6 +127,20 @@ const LoggedInUser: FC = () => {
                     ) : (
                         <p className="text-red-600">Fehler: Angebote konnten nicht geladen werden.</p>
                     )}
+                </section>
+            :
+                <section className="w-full bg-white rounded-lg shadow-2xl p-6">
+                    <h2 className="text-2xl font-semibold text-green-600 mb-4 ">Angemeldete Angebote</h2>
+                    {(offers.length <= 0) && <p className="text-md font-medium text-gray-800">Die Angebote warten auf dich!</p>}
+                    <div className="flex flex-col gap-2">
+                    {Array.isArray(offers) ? (
+                        offers.map(offer => (
+                            <AngemeldetesAngebotSummary offer={offer} key={offer.offerId} abmeldenAngebot={handleAbmeldenAngebot}/>
+                        ))
+                    ) : (
+                        <p className="text-red-600">Fehler: Angebote konnten nicht geladen werden.</p>
+                    )}
+                    </div>
                 </section>
             }
             <section className="w-full bg-white rounded-lg shadow-2xl p-6">
