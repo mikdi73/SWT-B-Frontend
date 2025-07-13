@@ -66,3 +66,12 @@ export const LANGUAGE_OPTIONS = [
     {value: 'Englisch', label: 'Englisch'},
     // Weitere Sprachen...
 ];
+
+// getLabel um das Label Text von den Optionen zu kriegen, anstatt den Valuestring
+export const getLabel = (
+    value: string,
+    options: { value: string; label: string }[]
+): string => {
+    const opt = options.find(o => o.value === value)
+    return opt ? opt.label : value
+}

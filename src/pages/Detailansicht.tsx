@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
-import {AngebotFormValues} from "../models/AngebotType"
+import {AngebotFormValues, getLabel} from "../models/AngebotType"
 import ScheduleSection from "../components/ScheduleSection"
 import FeedbackSection from "../components/FeedbackSection"
 import { ArrowLeft } from "lucide-react"
@@ -9,14 +9,7 @@ import {AdresseMap} from "../components/AdresseMap.tsx";
 import {url} from "../models/url.ts";
 
 
-// Helfer: Label finden
-const getLabel = (
-    value: string,
-    options: { value: string; label: string }[]
-): string => {
-    const opt = options.find(o => o.value === value)
-    return opt ? opt.label : value
-}
+
 
 export default function Detailansicht() {
     const { offerId } = useParams<{ offerId: string }>()
@@ -61,7 +54,7 @@ export default function Detailansicht() {
             <span className="text-gray-700 font-medium">
               {offer.cost === 0 ? 'Kostenlose Anmeldung' : `${offer.cost.toFixed(2)} € pro Anmeldung`}
             </span>
-                        <button
+                        <button onClick={() => navigate(`/details/${offerId}/anmelden`)}
                             className="w-full sm:w-auto px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition">
                             Jetzt anmelden
                         </button>

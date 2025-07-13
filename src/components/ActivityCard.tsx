@@ -2,7 +2,7 @@ import {FC} from "react"
 import {Heart} from "lucide-react"
 import Testbild from "../assets/fussball.jpg";
 import {useNavigate} from "react-router";
-import {useFavorites} from "../components/FavoritenContext";
+import {useFavorites} from "./FavoritenContext.tsx";
 import { AngebotFormValues } from "../models/AngebotType";
 
 type CardProps = {
@@ -47,7 +47,7 @@ const ActivityCard: FC<CardProps> = ({offer}: CardProps) => {
                 <button
                     className="p-3 rounded-lg cursor-pointer border bg-green-600 text-white hover:bg-green-700 transition"
                     style={{ borderColor: "#1a8f4a" }}
-                    onClick={() => navigate("/details/" + offer.offerId)}>Anmelden
+                    onClick={() => navigate(`/details/${offer.offerId}/anmelden`)}>Anmelden
                 </button>
             </div>
         </div>

@@ -12,6 +12,8 @@ import NeueAktivitaet from "./pages/NeueAktivitaet.tsx";
 import NeueAktivitaetSuccess from "./pages/NeueAktivitaetSuccess.tsx";
 import AuthorApplicationForm from "./pages/AuthorApplicationForm.tsx";
 import UpdateAngebot from "./pages/UpdateAngebot.tsx";
+import AngebotAnmelden from "./pages/AngebotAnmelden.tsx";
+import AngebotAnmeldungSuccess from "./pages/AngebotAnmeldenSuccess.tsx";
 
 function App() {
 
@@ -27,6 +29,10 @@ function App() {
             <Route path="/favoriten" element={<Favoritenansicht/>}/>
             <Route path="/details/:offerId" element={<Detailansicht/>}/>
             <Route path="/karte" element={<Kartenansicht/>}/>
+            <Route path="/details/:offerId/anmelden"
+                   element={isLoggedIn ? <AngebotAnmelden/> : <Navigate to="/user" replace/>}/>
+            <Route path="/details/anmelden/success"
+                   element={isLoggedIn ? <AngebotAnmeldungSuccess/> : <Navigate to="/user" replace/>}/>
 
             <Route
                 path="/anmelden"
