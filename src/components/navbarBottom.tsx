@@ -51,6 +51,10 @@ export default function BottomNavbar() {
                         key={index}
                         label={item.label}
                         icon={iconMap[item.label]}
+                        sx={{
+                            color: '#a9a9a9',
+                            '&.Mui-selected': { color: '#007C31' }
+                        }}
                     />
                 ))}
             </BottomNavigation>
