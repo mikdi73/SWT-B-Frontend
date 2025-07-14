@@ -115,6 +115,7 @@ export default function Registrieren() {
 
     return (
         <ThemeProvider theme={theme}>
+            <div className="pb-32">
             <Box className="max-w-md mx-auto mt-12 p-6 bg-white rounded-2xl shadow-lg">
                 <Typography
                     variant="h4"
@@ -259,6 +260,7 @@ export default function Registrieren() {
                     an
                 </Typography>
             </Box>
+            </div>
         </ThemeProvider>
     );
 }
