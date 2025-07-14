@@ -15,19 +15,19 @@ KidsApp für die Stadt Herne
 ## Mockup
 - Startseite
   <br>
-  <img src="Kidsapp/src/assets/Homepage.jpg" alt="Homepage" height="400"/>
+  <img src="src/assets/Homepage.jpg" alt="Homepage" height="400"/>
 
 - Filter
   <br>
-  <img src="Kidsapp/src/assets/Filter.jpg" alt="Filter" height="400"/>
+  <img src="src/assets/Filter.jpg" alt="Filter" height="400"/>
 
 - Detailansicht
   <br>
-  <img src="Kidsapp/src/assets/Detail.jpg" alt="Detail" height="400"/>
+  <img src="src/assets/Detail.jpg" alt="Detail" height="400"/>
 
 - Profil
   <br>
-  <img src="Kidsapp/src/assets/Profil.jpg" alt="Profil" height="400"/>
+  <img src="src/assets/Profil.jpg" alt="Profil" height="400"/>
 
 ## Autoren
 - Henrik Abtmeyer
