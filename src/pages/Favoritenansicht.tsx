@@ -6,11 +6,11 @@ export default function Favoritenansicht(){
 
     return(
         <>
-           <h1 className="flex lg:justify-center font-bold text-2xl" style={{ color: "#1B171B" }}>
+           <h1 className="flex justify-center font-bold text-2xl" style={{ color: "#1B171B" }}>
                 Favoriten
            </h1>
 
-            <hr className="h-px w-[90%] bg-[#d3d3d3] border-0 justify-self-center my-5 mb-2.5" />
+           <hr className="h-px w-[90%] bg-[#d3d3d3] border-0 justify-self-center my-5 mb-2.5" />
 
             {favorites.length === 0 ? (
                 <p>Noch keine Favoriten gespeichert. Klicke auf das Herz, um Angebote zu merken.</p>
