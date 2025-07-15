@@ -6,7 +6,7 @@ export default function Favoritenansicht(){
 
     return(
         <>
-           <h1 className="flex justify-center font-bold text-2xl" style={{ color: "#1B171B" }}>
+           <h1 className="flex justify-center font-bold text-2xl text-green-600">
                 Favoriten
            </h1>
 
