@@ -83,7 +83,7 @@ function App() {
                        <UpdateAngebot/>
                    ) : (<Navigate to="/user" replace/>)}/>
             <Route
-                path="/author-bewerben"
+                path="/autor-bewerben"
                 element={
                     isLoggedIn && !isAuthor ? (
                         <AuthorApplicationForm/>

@@ -43,7 +43,7 @@ const AuthorApplicationForm: FC = () => {
             <form
                 className="w-full md:w-1/2 mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
 
-                <h2 className="text-2xl font-semibold text-green-600 text-center">Author-Antrag</h2>
+                <h2 className="text-2xl font-semibold text-green-600 text-center">Autor-Antrag</h2>
 
                 {/* Username (aus Context) */}
                 <div className="flex flex-col">

@@ -84,7 +84,7 @@ const LoggedInUser: FC = () => {
                                 onClick={() => navigate("/neue-aktivitaet/")}>Neue Aktivität erstellen</button>
                             : < button
                                 className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg hover:bg-green-700 transition"}
-                                onClick={() => navigate("/author-bewerben")}>Als Author bewerben</button>
+                                onClick={() => navigate("/autor-bewerben")}>Als Autor bewerben</button>
                         }
                         <button
                             className={"p-4 bg-green-600 text-white font-medium shadow-md rounded-lg transition hover:bg-green-700"}
