@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import { useUser } from '../hooks/UserProvider.tsx';
 import {url} from "../models/url.ts";
 
-// Einheitliches Theme für konsistente Primary-Farbe
 const theme = createTheme({
     palette: {
         primary: {
@@ -53,7 +52,6 @@ export default function Anmelden() {
         }
     };
 
-    // Style für focusing fields
     const activeStyle = (theme: Theme) => ({
         '& .MuiOutlinedInput-root.Mui-focused fieldset': {
             borderColor: theme.palette.primary.main,

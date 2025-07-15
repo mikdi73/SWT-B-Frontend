@@ -1,4 +1,3 @@
-// BearbeiteAktivitaet.tsx
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router';
 import {useUser} from '../hooks/UserProvider';
@@ -23,7 +22,7 @@ export default function UpdateAngebot() {
     const handleUpdate = async (data: AngebotFormValues) => {
         const payload = {...data, offerId: offerId};
         fetch(`${url}/api/offer?jwt=${user?.jwt}`, {
-            method: 'POST', // oder POST, je nach Backend
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload),
         }).then((res) => {
@@ -38,7 +37,6 @@ export default function UpdateAngebot() {
 
     };
 
-    // Solange Daten laden, Spinner oder Platzhalter anzeigen:
     if (!initialValues) return <div>Lädt…</div>;
 
     return (<AngebotFormular initialValues={initialValues} onSubmit={handleUpdate} updateOffer={true}/>);

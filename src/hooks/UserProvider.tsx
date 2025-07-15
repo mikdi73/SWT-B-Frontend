@@ -1,4 +1,3 @@
-// src/context/UserContext.tsx
 import {createContext, useState, useContext, ReactNode, useCallback} from 'react';
 import { User } from '../models/globalTypes.ts';
 

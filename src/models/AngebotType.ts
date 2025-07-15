@@ -64,7 +64,6 @@ export type Weekday = keyof AngebotFormValues['eventSchedule'];
 export const LANGUAGE_OPTIONS = [
     {value: 'Deutsch', label: 'Deutsch'},
     {value: 'Englisch', label: 'Englisch'},
-    // Weitere Sprachen...
 ];
 
 // getLabel um das Label Text von den Optionen zu kriegen, anstatt den Valuestring

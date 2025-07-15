@@ -27,13 +27,11 @@ export default function AngebotAnmelden() {
 
     const [offer, setOffer] = useState<AngebotFormValues | null>(null);
 
-    // Neue States für User-Infos
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState(user?.email || "");
     const [age, setAge] = useState<number | "">("");
 
-    // Styling für Fokus
     const theme = createTheme({
         palette: {primary: {main: "#00a63e"}},
     });
@@ -62,8 +60,6 @@ export default function AngebotAnmelden() {
 
     const handleUserInfoSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: Hier deinen Submit-Logic für die Anmeldung ans Backend einfügen
-        console.log({firstName, lastName, email, age, offerId});
         fetch(`${url}/api/offer/register?jwt=${user?.jwt}&offer=${offerId}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},

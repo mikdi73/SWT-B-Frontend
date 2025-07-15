@@ -21,7 +21,6 @@ const formatDate = (iso?: string) => {
 const OfferSummary: FC<OfferSummaryProps> = ({ offer }: OfferSummaryProps) => {
 
     const navigate = useNavigate();
-    // Status-Klasse ermitteln
     const statusClass = offer.status === 'ACCEPTED'
         ? 'bg-green-100 text-green-800'
         : offer.status === 'PENDING'

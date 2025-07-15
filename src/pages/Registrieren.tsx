@@ -66,7 +66,6 @@ export default function Registrieren() {
         setError('');
         setFieldError(false);
 
-        // E-Mail-Format prüfen
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError('Bitte gib eine gültige E-Mail-Adresse ein.');
@@ -74,7 +73,6 @@ export default function Registrieren() {
             return;
         }
 
-        // Check passwords match
         if (password !== password2) {
             setError('Die Passwörter stimmen nicht überein.');
             setFieldError(true);

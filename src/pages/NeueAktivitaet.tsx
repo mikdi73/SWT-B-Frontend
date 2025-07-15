@@ -29,7 +29,6 @@ export default function NeueAktivitaet() {
 
 
     const onSubmit = (data: AngebotFormValues) => {
-        // Filter eventSchedule to include only days with both start and end times
 
         const filteredSchedule = Object.fromEntries(
             Object.entries(data.eventSchedule)

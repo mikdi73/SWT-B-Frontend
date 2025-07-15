@@ -56,9 +56,8 @@ const LoggedInUser: FC = () => {
                         return res.json();
                     })
                     .then(fetchedOffer => {
-                        // hänge jeden Offer an das bestehende Array an
+                        // hänge jedes Offer an das bestehende Array an
                         setOffers(prev => {
-                            // optional: Duplikate vermeiden
                             if (prev.some(o => o.offerId === fetchedOffer.offerId)) {
                                 return prev;
                             }

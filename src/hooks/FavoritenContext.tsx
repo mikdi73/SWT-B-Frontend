@@ -22,8 +22,8 @@ export const FavoritenContext = ({children}: {children: ReactNode}) => {
   const toggleFavorite = (offer: AngebotFormValues) => {
     setFavorites(prev =>
       prev.some(o => o.offerId === offer.offerId)
-        ? prev.filter(o => o.offerId !== offer.offerId) // remove
-        : [...prev, offer]                              // add
+        ? prev.filter(o => o.offerId !== offer.offerId)
+        : [...prev, offer]
     );
   };
 

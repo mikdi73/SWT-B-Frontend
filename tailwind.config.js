@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                herne: "#017E3C", // Einzelfarbe
+                herne: "#017E3C",
             },
         },
     },

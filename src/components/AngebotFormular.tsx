@@ -1,4 +1,3 @@
-// OfferForm.tsx
 import {useForm, Controller, FormProvider, Path} from 'react-hook-form';
 import Select from 'react-select';
 import {

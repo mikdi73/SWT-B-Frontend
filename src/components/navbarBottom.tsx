@@ -1,4 +1,3 @@
-// components/BottomNavbar.tsx
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material"
 import HomeIcon from "@mui/icons-material/Home"
 import PlaceIcon from "@mui/icons-material/Place"
@@ -7,7 +6,6 @@ import PersonIcon from "@mui/icons-material/Person"
 import { JSX, useState } from "react"
 import { useNavigate } from "react-router"
 
-// Icons für bekannte Labels
 const iconMap: { [key: string]: JSX.Element } = {
     Homepage: <HomeIcon />,
     Karte: <PlaceIcon />,
@@ -30,7 +28,6 @@ export default function BottomNavbar() {
     const [value, setValue] = useState(0)
     const navigate = useNavigate()
 
-    // Nur relevante Items mit Icon anzeigen
     const visibleItems = navItems.filter((item) => iconMap[item.label])
 
     return (
