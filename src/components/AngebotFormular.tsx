@@ -46,6 +46,7 @@ export default function AngebotFormular({initialValues, onSubmit, updateOffer}: 
                     </h1>
                 </div>
                 <button
+                    type="button"
                     className="cursor-pointer font-medium"
                     onClick={() => navigate("/user")}
                 >
