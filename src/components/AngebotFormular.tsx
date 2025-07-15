@@ -1,5 +1,5 @@
 // OfferForm.tsx
-import { useForm, Controller, FormProvider,Path } from 'react-hook-form';
+import {useForm, Controller, FormProvider, Path} from 'react-hook-form';
 import Select from 'react-select';
 import {
     TARGET_GROUP_OPTIONS,
@@ -28,7 +28,7 @@ const WEEKDAYS: Weekday[] = [
     'SUNDAY',
 ];
 
-export default function AngebotFormular({ initialValues, onSubmit, updateOffer }: OfferFormProps) {
+export default function AngebotFormular({initialValues, onSubmit, updateOffer}: OfferFormProps) {
 
     const navigate = useNavigate();
     const methods = useForm<AngebotFormValues>({
@@ -59,12 +59,12 @@ export default function AngebotFormular({ initialValues, onSubmit, updateOffer }
                                className="border p-2 rounded"/>
                         <label className={"flex flex-row text-xl gap-2 items-center"}>
                             PLZ
-                            <input {...register('postalCode', {valueAsNumber: true})} placeholder="PLZ"
+                            <input {...register('postalCode', {valueAsNumber: true, required: true})} placeholder="PLZ"
                                    className="border p-2 rounded w-full"/>
                         </label>
-                        <input {...register('street')} placeholder="Straße"
+                        <input {...register('street', {required: true})} placeholder="Straße"
                                className="border p-2 rounded col-span-1 md:col-span-2"/>
-                        <input {...register('city')} placeholder="Stadt"
+                        <input {...register('city', {required: true})} placeholder="Stadt"
                                className="border p-2 rounded col-span-1 md:col-span-2"/>
                     </div>
                 </section>
@@ -82,6 +82,7 @@ export default function AngebotFormular({ initialValues, onSubmit, updateOffer }
                                     options={OFFER_TYPE_OPTIONS}
                                     placeholder={"Typ der Aktivität"}
                                     isMulti
+                                    required={true}
                                     getOptionLabel={opt => opt.label}
                                     getOptionValue={opt => opt.value}
                                     value={selectedOptions}
@@ -175,6 +176,7 @@ export default function AngebotFormular({ initialValues, onSubmit, updateOffer }
                                 <Select
                                     options={FILTER_OPTIONS}
                                     placeholder={"Filter Optionen"}
+                                    required={true}
                                     isMulti
                                     value={selected}
                                     onChange={opts => field.onChange(opts.map(o => o.value))}
@@ -218,13 +220,13 @@ export default function AngebotFormular({ initialValues, onSubmit, updateOffer }
                 {/* Abschnitt: Zusätzliche Informationen */}
                 <section className="bg-white p-4 rounded-lg shadow">
                     <h2 className="text-xl font-semibold mb-4">Zusätzliche Informationen</h2>
-                    <textarea {...register('additionalInformation')} rows={4} placeholder="Zusätzliche Hinweise"
+                    <textarea {...register('additionalInformation', {required: true})} rows={4} placeholder="Zusätzliche Hinweise"
                               className="w-full border p-2 rounded"/>
                 </section>
 
                 <button type="submit" onClick={handleSubmit(onSubmit)}
                         className="bg-green-600 text-white py-2 px-6 rounded shadow hover:bg-green-800 transition">
-                    {updateOffer ? ("Angebot bearbeiten"): ("Angebot erstellen")}
+                    {updateOffer ? ("Angebot bearbeiten") : ("Angebot erstellen")}
                 </button>
             </form>
         </FormProvider>

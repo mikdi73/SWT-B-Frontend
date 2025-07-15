@@ -40,7 +40,6 @@ export default function NeueAktivitaet() {
             ...data,
             eventSchedule: filteredSchedule,
         };
-        //TODO Fetch aufruf muss tatsächlich noch funktionieren später
         fetch(`${url}/api/offer?jwt=${user?.jwt}`, {
             method: 'POST',
             headers: {

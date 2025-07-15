@@ -6,7 +6,6 @@ export const TARGET_GROUP_OPTIONS = [
 
 export const OFFER_TYPE_OPTIONS = [
     { value: 'COURSE_WORKSHOP', label: 'Kurs/Workshop' },
-    { value: 'SEMINAR', label: 'Seminar' },
     { value: 'EVENT', label: 'Event' },
     { value: 'CONSULTATION', label: 'Beratung' },
     { value: 'MEDICAL_CONSULTATION', label: 'Medizinische Beratung' },
