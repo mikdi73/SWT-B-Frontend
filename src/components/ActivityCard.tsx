@@ -1,7 +1,7 @@
 import {FC} from "react"
 import {Heart} from "lucide-react"
 import {useNavigate} from "react-router";
-import {useFavorites} from "./FavoritenContext.tsx";
+import {useFavorites} from "../hooks/FavoritenContext.tsx";
 import { AngebotFormValues } from "../models/AngebotType";
 import babysitter from "../assets/babysitter.jpg";
 import codingClub from "../assets/codingClub.jpg";

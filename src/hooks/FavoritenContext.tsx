@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState, ReactNode} from "react";
-import { AngebotFormValues } from "../models/AngebotType";
+import { AngebotFormValues } from "../models/AngebotType.ts";
 
 interface FavoritesCtx {
   favorites: AngebotFormValues[];

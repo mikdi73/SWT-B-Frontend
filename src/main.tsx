@@ -3,7 +3,7 @@ import "./index.css"
 import App from "./App.tsx"
 import {StrictMode} from "react"
 import {BrowserRouter} from "react-router"
-import {FavoritenContext} from "./components/FavoritenContext";
+import {FavoritenContext} from "./hooks/FavoritenContext.tsx";
 import NavbarTop from "./components/navbarTop.tsx"
 import NavbarBottom from "./components/navbarBottom.tsx"
 import {UserProvider} from "./hooks/UserProvider.tsx";
@@ -14,8 +14,6 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
         <StrictMode>
-            {/*TODO implement AuthGate */}
-            {/* <AuthGate> */}
             <UserProvider>
                 <BrowserRouter>
                     <FavoritenContext>
@@ -25,7 +23,6 @@ if (rootElement) {
                     </FavoritenContext>
                 </BrowserRouter>
             </UserProvider>
-            {/* </AuthGate> */}
         </StrictMode>
     )
 } else {

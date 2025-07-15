@@ -1,5 +1,5 @@
 import ActivityCard from "../components/ActivityCard";
-import {useFavorites} from "../components/FavoritenContext";
+import {useFavorites} from "../hooks/FavoritenContext.tsx";
 
 export default function Favoritenansicht(){
     const {favorites} = useFavorites();

@@ -23,7 +23,6 @@ function App() {
 
     return (
         <Routes>
-            {/* Public routes */}
             <Route path="/" element={<Homepage/>}/>
             <Route path="/homepage" element={<Homepage/>}/>
             <Route path="/favoriten" element={<Favoritenansicht/>}/>
